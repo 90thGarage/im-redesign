@@ -40,15 +40,53 @@ npx github:90thGarage/im-redesign install --dir ./mi-proyecto
 > Nota: con `npx github:...` el subcomando `install` es explícito. La forma sin subcomando abre el wizard.
 
 ## Qué instala
-- **Skills:** `restyle-view` (núcleo) + los 5 estándares `design-menu`, `design-abm`,
-  `design-consultas`, `design-facturacion-rapida`, `design-comprobante` + `ui-design-system`
-  (shadcn + tokens). Opcional: base `react-19` / `tailwind-4` / `typescript`.
-- **Comandos:** `im-go` (todo en uno), `im-setup`, `im-restyle`, `im-review-ui`.
 
-## Cómo funciona
-Le indicás una vista existente, `/restyle` lee **todo** su código, **infiere** de cuál de los 5
-tipos es, y reescribe **solo la presentación** a shadcn + tokens. Queda **drop-in**: misma API
-(export/props/ruta), misma lógica, mismos endpoints, mismo teclado — solo se ve mejor.
+El instalador copia, dentro de la carpeta del agente que elijas (`.claude/`, `.cursor/`,
+`.agents/` o `.codex/`):
+
+- **Skills** (`<agente>/skills/`):
+  - `restyle-view` — el **núcleo**: toma una vista y la reembellece preservando todo.
+  - `ui-design-system` — el sistema de diseño (tokens, shadcn, tipografía) con sus **referencias**
+    en `reference/` (`design.md`, `colors-tokens.md`, `refinement.md`, `shadcn.md`,
+    `layout-tables.md`, `components.md`, `modals-dropdowns.md`).
+  - Los **5 estándares por tipo** de vista: `design-menu`, `design-abm`, `design-consultas`,
+    `design-facturacion-rapida`, `design-comprobante`.
+  - Opcional (base del stack): `react-19`, `tailwind-4`, `typescript`.
+- **Comandos** (`<agente>/commands/`): `im-go`, `im-setup`, `im-restyle`, `im-review-ui`.
+
+## Cómo funcionan las skills
+
+Las **skills** son carpetas con un `SKILL.md` que tu agente (Claude Code, Cursor, etc.) **lee
+automáticamente** cuando la tarea aplica: cada `SKILL.md` describe cuándo usarse, qué preservar y
+a qué referencias acudir. No las invocás a mano — las activan los **comandos** (`/im-*`), que
+orquestan las skills en el orden correcto.
+
+El flujo de un restyle es así:
+
+1. **Inferencia de tipo.** `restyle-view` lee **todo** el código de la vista (componente + hooks/
+   estilos) y deduce de cuál de los **5 tipos** es (Menú / ABM / Consultas / Facturación rápida /
+   Comprobante). Si duda, pregunta.
+2. **Carga del estándar.** Lee la skill `design-<tipo>` correspondiente (estructura, diagrama de
+   layout, qué preservar, mínimos de shadcn) + `ui-design-system` (tokens y reglas visuales).
+3. **Setup bloqueante.** Verifica shadcn + tokens del design system; si falta algo, lo instala
+   antes de tocar la vista (contrato en `reference/shadcn.md`).
+4. **Reescritura solo de presentación.** Cambia JSX/estilos a shadcn + tokens + refinamiento,
+   manteniendo cada handler/binding/ref conectado igual. Queda **drop-in**: misma API
+   (export/props/ruta), misma lógica, mismos endpoints, mismo teclado — solo se ve mejor.
+5. **Review en loop.** Evalúa contra el design system y la preservación, escribe un reporte en
+   `docs/im-restyle/<vista>.md`, aplica los fixes seguros y repite hasta que pasa.
+
+### Los comandos
+
+| Comando | Qué hace |
+|---|---|
+| `/im-go <vista>` | **Todo en uno** (recomendado): setup si hace falta → restyle → review → arregla en loop. |
+| `/im-setup` | Prepara el proyecto (shadcn + tokens + fuentes), sin romper nada. Idempotente. |
+| `/im-restyle <vista>` | Reembellece una vista preservando API, lógica y comportamiento. |
+| `/im-review-ui <vista>` | Verifica que el restyle quedó estándar **y** no rompió nada; reporta hallazgos. |
+
+Uso típico: instalás, abrís/reiniciás tu agente y corrés `/im-go <ruta-de-la-vista>`. Para el
+resto (que se ve mejor pero se usa igual) no tenés que tocar nada más.
 
 ## Probarlo localmente (sin publicar)
 ```bash
@@ -66,4 +104,3 @@ Dos opciones: (a) `npx github:90thGarage/im-redesign` (repo en GitHub), o (b) pa
 
 ---
 © 2026 90th Garage — InfoManager Restyle. Uso bajo licencia (venta única).
-# im-redesign
