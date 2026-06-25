@@ -1,0 +1,36 @@
+{
+  "name": "redesign-ui-kit-merged",
+  "version": "0.2.4",
+  "description": "Restyle de vistas React de InfoManager a UI estandar (shadcn + tokens), preservando API y funcionalidad. Edicion fusionada: contrato shadcn bloqueante, tablas responsive, diagramas por tipo. Por 90th Garage.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "redesign-ui-kit-merged": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "infomanager",
+    "legacy-modernization",
+    "skills",
+    "react",
+    "shadcn",
+    "claude-code"
+  ],
+  "author": "90th Garage",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/90thGarage/im-redesign"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "cac": "^6.7.14",
+    "fs-extra": "^11.2.0"
+  }
+}

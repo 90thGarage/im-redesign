@@ -1,0 +1,24 @@
+Licencia de uso — infomanager-ui
+Copyright (c) 2026 90th Garage. Todos los derechos reservados.
+
+Este software (las skills, los comandos y el CLI "infomanager-ui") se licencia, no se vende.
+Mediante el pago correspondiente, se otorga al COMPRADOR identificado en la orden de compra
+una licencia no exclusiva, intransferible y perpetua para usar este paquete.
+
+PERMITIDO
+- Usar e integrar las skills y comandos en los proyectos propios del comprador.
+- Modificar el contenido para uso interno del comprador.
+
+PROHIBIDO (sin autorizacion escrita de 90th Garage)
+- Redistribuir, revender, sublicenciar, ceder, publicar o compartir el paquete o su
+  contenido, total o parcialmente, con terceros.
+- Publicarlo en cualquier registro o repositorio publico (npm, GitHub publico, etc.).
+
+GARANTIA Y RESPONSABILIDAD
+EL SOFTWARE SE PROVEE "TAL CUAL", SIN GARANTIA DE NINGUN TIPO, EXPRESA O IMPLICITA. EN
+NINGUN CASO 90TH GARAGE SERA RESPONSABLE POR RECLAMOS O DANOS DERIVADOS DEL USO DEL
+SOFTWARE. Esta es una venta unica: no incluye soporte, actualizaciones ni mantenimiento,
+salvo acuerdo por escrito por separado.
+
+Comprador: [COMPRADOR]
+Fecha: [FECHA]

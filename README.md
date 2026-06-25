@@ -22,19 +22,19 @@ endpoints y comportamiento**. Detecta el stack, pregunta para qué agente y copi
 Desde la carpeta de tu proyecto, en modo interactivo (wizard):
 
 ```bash
-npx github:90thGarage/redesign-ui-kit-merged
+npx github:90thGarage/im-redesign
 ```
 
-> Ajustá `90thGarage/redesign-ui-kit-merged` al owner/nombre real del repo donde lo publiques.
+> Repo público: `90thGarage/im-redesign`.
 
 Después, en tu agente: `/im-go <vista>` hace todo (setup si hace falta → restyle → review → arregla). Avanzado: `/im-setup` → `/im-restyle` → `/im-review-ui`.
 
 ## Flags (no interactivo)
 ```bash
-npx github:90thGarage/redesign-ui-kit-merged install --yes --agent claude   # instala sin preguntar
-npx github:90thGarage/redesign-ui-kit-merged install --agent antigravity    # claude | antigravity | cursor | codex
-npx github:90thGarage/redesign-ui-kit-merged install --skip-base            # sin las skills base (react/tailwind/ts)
-npx github:90thGarage/redesign-ui-kit-merged install --dir ./mi-proyecto
+npx github:90thGarage/im-redesign install --yes --agent claude   # instala sin preguntar
+npx github:90thGarage/im-redesign install --agent antigravity    # claude | antigravity | cursor | codex
+npx github:90thGarage/im-redesign install --skip-base            # sin las skills base (react/tailwind/ts)
+npx github:90thGarage/im-redesign install --dir ./mi-proyecto
 ```
 
 > Nota: con `npx github:...` el subcomando `install` es explícito. La forma sin subcomando abre el wizard.
@@ -60,7 +60,7 @@ cd /ruta/a/tu/proyecto && npx /ruta/al/redesign-ui-kit-merged-<version>.tgz
 ```
 
 ## Entregar al comprador
-Dos opciones: (a) `npx github:90thGarage/redesign-ui-kit-merged` (repo en GitHub), o (b) pasarle el
+Dos opciones: (a) `npx github:90thGarage/im-redesign` (repo en GitHub), o (b) pasarle el
 `.tgz` y que corra `npx ./redesign-ui-kit-merged-<version>.tgz` (o `npm i -g ./...tgz` y después
 `redesign-ui-kit-merged`). Sin infra ni mantenimiento. Protección: control de entrega + `LICENSE`.
 

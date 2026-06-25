@@ -1,0 +1,4 @@
+node_modules/
+*.tgz
+**/.fuse_hidden*
+**/.DS_Store
