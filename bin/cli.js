@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import path from "node:path";
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 import fs from "fs-extra";
 import { cac } from "cac";
@@ -9,12 +10,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const TEMPLATES = path.join(ROOT, "templates");
 
+// `commandsRoot: "home"` => los comandos se instalan en el HOME del usuario (no en el proyecto).
+// Codex lee los slash commands ("custom prompts") SOLO desde ~/.codex/prompts/ (global), no desde
+// una carpeta del repo. Sus skills sí son de proyecto (.codex/skills/).
 const AGENTS = {
   claude: { label: "Claude Code", skills: ".claude/skills", commands: ".claude/commands", base: ".claude/" },
   antigravity: { label: "Antigravity", skills: ".agents/skills", commands: ".agents/commands", base: ".agents/" },
   cursor: { label: "Cursor", skills: ".cursor/skills", commands: ".cursor/commands", base: ".cursor/" },
-  codex: { label: "Codex", skills: ".codex/skills", commands: ".codex/commands", base: ".codex/" },
+  codex: { label: "Codex", skills: ".codex/skills", commands: ".codex/prompts", commandsRoot: "home", base: ".codex/" },
 };
+
+// Resuelve el destino de los comandos: HOME (~) para Codex, o el proyecto para el resto.
+function commandsTarget(agentDef, cwd) {
+  const root = agentDef.commandsRoot === "home" ? os.homedir() : cwd;
+  return path.join(root, agentDef.commands);
+}
+// Para mostrar rutas lindas (~ en vez del home absoluto).
+function pretty(p2) {
+  const home = os.homedir();
+  return p2.startsWith(home) ? p2.replace(home, "~") : p2;
+}
 
 const cli = cac("redesign-ui-kit");
 cli.option("--yes", "Instalar todo sin preguntar");
@@ -103,30 +118,36 @@ async function installCore() {
     withBase = b;
   }
 
+  const skillsDir = path.join(cwd, agentDef.skills);
+  const commandsDir = commandsTarget(agentDef, cwd);
+
   if (!options.yes && !options.force) {
-    const ok = await p.confirm({ message: `Copio el kit en ${agentDef.skills} y ${agentDef.commands}. Sobrescribe solo archivos del kit con el mismo nombre; NO borra ni toca tus otros archivos. ¿Confirmás?` });
+    const ok = await p.confirm({ message: `Copio skills en ${pretty(skillsDir)} y comandos en ${pretty(commandsDir)}. Sobrescribe solo archivos del kit con el mismo nombre; NO borra ni toca tus otros archivos. ¿Confirmás?` });
     if (p.isCancel(ok) || !ok) return false;
   }
 
   const s = p.spinner();
   s.start("Instalando");
-  // skills propias de InfoManager
-  await fs.copy(path.join(TEMPLATES, "skills"), path.join(cwd, agentDef.skills), { overwrite: true });
-  p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "skills")).length} skills de InfoManager → ${agentDef.skills}`);
-  // comandos
-  await fs.copy(path.join(TEMPLATES, "commands"), path.join(cwd, agentDef.commands), { overwrite: true });
-  p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "commands")).length} comandos → ${agentDef.commands}`);
+  // skills propias de InfoManager (siempre de proyecto)
+  await fs.copy(path.join(TEMPLATES, "skills"), skillsDir, { overwrite: true });
+  p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "skills")).length} skills de InfoManager → ${pretty(skillsDir)}`);
+  // comandos (proyecto para la mayoría; ~/.codex/prompts para Codex)
+  await fs.copy(path.join(TEMPLATES, "commands"), commandsDir, { overwrite: true });
+  p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "commands")).length} comandos → ${pretty(commandsDir)}`);
   // skills base (opcional) -> van en la misma carpeta de skills
   const baseDir = path.join(TEMPLATES, "base-skills");
   if (withBase && fs.existsSync(baseDir)) {
     for (const entry of fs.readdirSync(baseDir)) {
-      await fs.copy(path.join(baseDir, entry), path.join(cwd, agentDef.skills, entry), { overwrite: true });
+      await fs.copy(path.join(baseDir, entry), path.join(skillsDir, entry), { overwrite: true });
     }
-    p.log.success(`skills base (react-19, tailwind-4, typescript) → ${agentDef.skills}`);
+    p.log.success(`skills base (react-19, tailwind-4, typescript) → ${pretty(skillsDir)}`);
   } else {
     p.log.message("skills base omitidas");
   }
   s.stop("Archivos copiados");
+  if (agentDef.commandsRoot === "home") {
+    p.log.info(`Codex: los slash commands quedaron en ${pretty(commandsDir)} (global). Reiniciá Codex y se ven como /im-go, /im-setup, /im-restyle, /im-review-ui.`);
+  }
   return true;
 }
 

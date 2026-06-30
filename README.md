@@ -54,6 +54,11 @@ El instalador copia, dentro de la carpeta del agente que elijas (`.claude/`, `.c
   - Opcional (base del stack): `react-19`, `tailwind-4`, `typescript`.
 - **Comandos** (`<agente>/commands/`): `im-go`, `im-setup`, `im-restyle`, `im-review-ui`.
 
+> **Codex** usa otra convención: las **skills** van al proyecto (`.codex/skills/`), pero los
+> **slash commands** (custom prompts) los lee solo desde `~/.codex/prompts/` (global). El
+> instalador ya los copia ahí cuando elegís `--agent codex`. Reiniciá Codex y aparecen como
+> `/im-go`, `/im-setup`, `/im-restyle`, `/im-review-ui`.
+
 ## Cómo funcionan las skills
 
 Las **skills** son carpetas con un `SKILL.md` que tu agente (Claude Code, Cursor, etc.) **lee
