@@ -20,10 +20,16 @@ const AGENTS = {
   codex: { label: "Codex", skills: ".codex/skills", commands: ".codex/prompts", commandsRoot: "home", base: ".codex/" },
 };
 
-// Resuelve el destino de los comandos: HOME (~) para Codex, o el proyecto para el resto.
+// Carpeta home de Codex: respeta $CODEX_HOME si está seteada; si no, ~/.codex.
+function codexHome() {
+  const env = (process.env.CODEX_HOME || "").trim();
+  return env ? path.resolve(env) : path.join(os.homedir(), ".codex");
+}
+// Resuelve el destino de los comandos: ~/.codex/prompts (o $CODEX_HOME/prompts) para Codex;
+// la carpeta del proyecto para el resto de los agentes.
 function commandsTarget(agentDef, cwd) {
-  const root = agentDef.commandsRoot === "home" ? os.homedir() : cwd;
-  return path.join(root, agentDef.commands);
+  if (agentDef.commandsRoot === "home") return path.join(codexHome(), "prompts");
+  return path.join(cwd, agentDef.commands);
 }
 // Para mostrar rutas lindas (~ en vez del home absoluto).
 function pretty(p2) {
