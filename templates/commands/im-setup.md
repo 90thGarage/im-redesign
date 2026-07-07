@@ -42,6 +42,11 @@ en marcha, NO greenfield). Hacé los pasos vos, verificá y reportá. Idempotent
    (ej. `body.light-theme`) distinta del override `.light`, agregá al final del CSS
    `html, body { background: var(--background); background-image: none; }` + `:root{color-scheme:dark}`
    `.light{color-scheme:light}`. Evita que el claro se asome en overscroll en modo oscuro.
+4c. **Resets legacy sin capa** (§3e): si hay un reset universal (`* { margin:0; padding:0 }`) o
+   resets de elemento (`body`, `input`, `button`…) SIN `@layer` en el CSS, envolvelos en
+   `@layer base`. Sin esto, el reset legacy le gana a las utilidades de Tailwind v4 (que están en
+   `@layer utilities`) y anula todo padding/margin de los componentes shadcn — el restyle se ve
+   sin espaciado aunque esté bien hecho.
 5. **Fuentes libres**: cargar Inter + Geist Mono + Space Grotesk desde Google Fonts (el
    `<link>` está en `colors-tokens.md`). Reemplazan a las pagas (Suisse/Neue Montreal) sin licencia.
    Verificar que carguen de verdad, no fallback.

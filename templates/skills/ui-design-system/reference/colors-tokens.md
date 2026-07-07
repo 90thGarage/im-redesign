@@ -205,6 +205,41 @@ CSS, gana el cascade y `bg-primary` resuelve a ese color, no a `#0057FF`.
 > Regla mental: si el primario "tira a morado", casi siempre es el **default de shadcn ganándole al
 > token** — no es que `#0057FF` sea morado. Forzá el token, no cambies el color.
 
+## 3e. Resets legacy sin capa que anulan las utilidades de Tailwind (IMPORTANTE)
+
+Misma familia que §3b/§3c, pero de **capas**, no de orden. En Tailwind v4 las utilidades viven en
+`@layer utilities`. Regla del cascade: **el CSS sin capa (unlayered) le gana a cualquier
+`@layer`, sin importar la especificidad.** Un reset legacy típico así:
+
+```css
+* { margin: 0; padding: 0; box-sizing: border-box; }
+```
+
+al estar SIN capa, pisa TODO `p-*`/`m-*`/`px-*`/`py-*`/`mx-auto` de los componentes shadcn → se
+ven **sin padding y sin centrar**, aunque el restyle esté bien hecho. Colores, `flex`, `gap-*` y
+arbitraries (`max-w-[...]`) sí funcionan, así que el bug pasa desapercibido y el build pasa igual:
+la vista parece "a medio restylear", no rota.
+
+**Fix (en `src/index.css`):** envolver los resets legacy **universales** y **de elemento** en
+`@layer base`, así las utilidades (capa posterior) vuelven a ganar:
+
+```css
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  input, button, select, textarea { font-family: inherit; }
+}
+```
+
+No cambia el comportamiento legacy: un `*` de especificidad 0 ya perdía contra todo lo demás;
+meterlo en una capa solo lo hace perder también contra las utilidades de Tailwind, que es lo
+deseado. NO hace falta capar las reglas scoped por clase (`.glass-input`, `.btn-*`…): los
+elementos shadcn no llevan esas clases. Solo el reset `*` (y resets de elemento suelto que toquen
+margin/padding/border) son el problema.
+
+**Verificar (navegador):** inspeccioná un contenedor restyleado con `px-*`/`mx-auto` y confirmá
+que el padding/margin **computado** NO es 0 (ej. `px-6` = `24px`). Si da 0, quedó un reset legacy
+sin capa.
+
 ## 4b. Fuentes (libres — Google Fonts, sin licencia)
 
 Sustituimos las pagas del Figma por equivalentes open-source casi idénticas:
