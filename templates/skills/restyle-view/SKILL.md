@@ -66,6 +66,8 @@ En el resto: se ve mejor, se usa igual.
 4. Usar las primitivas shadcn de `ui-design-system`; no inventar componentes. **shadcn es
    obligatorio** para todo control con equivalente (ver `reference/shadcn.md`).
 5. Tablas: caben en su contenedor; scroll horizontal solo como último recurso y reportado.
+6. **JS/JSX, no TypeScript:** el proyecto es JavaScript. La salida queda en `.jsx`, sin anotaciones
+   de tipos ni sintaxis TS, y sin crear archivos `.tsx`.
 
 ## Salida
 La misma vista, drop-in, con UI shadcn estándar. Reportar: tipo inferido, qué se cambió (solo

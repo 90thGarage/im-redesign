@@ -34,28 +34,41 @@ npx shadcn@latest add login-02
 │  [ ← VOLVER ]                 │  [ CLAVE                 ]  │
 │                               │  [       INGRESAR        ]  │
 │   (fondo azul + textura        │  ☐ MANTENER SESIÓN INICIADA│
-│    de líneas diagonales)      │      ¿Olvidaste tu clave?  │
+│    de líneas diagonales)      │ ¿OLVIDASTE TU CONTRASEÑA?  │
 └───────────────────────────────┴───────────────────────────┘
       panel de marca (~57%)            panel oscuro (~43%)
 ```
 
+### Spec fija: colores NO salen de tokens de tema
+Los dos paneles usan **color fijo, siempre igual, sin importar el tema** de la app (claro/oscuro):
+esta pantalla es la **única excepción documentada** a la regla "prohibido color literal" de
+`ui-design-system`. Motivo: es la puerta de entrada de marca, tiene que verse **idéntica** en
+ambos temas — no puede depender de qué tema quedó activo la última vez.
+- **NO usar `bg-primary`** para el panel izquierdo: `--primary` resuelve `#4f86ff` en el tema base
+  (oscuro) y `#0057FF` solo en `.light` — usar ese token daría un azul distinto según el tema.
+  Usar el **azul de marca fijo `#0057FF`** literal (o una constante/clase dedicada, no el token).
+- **NO usar `bg-background`/`bg-strong`** para el panel derecho (ambos invierten con el tema).
+  Usar los **valores de superficie oscura fijos** (`--background: #0b1220` / `--card: #1a2335`
+  del tema oscuro de `colors-tokens.md`) como color literal, no como token que resuelve por tema.
+
 ### Panel izquierdo (marca, ~57%)
-- **Fondo:** azul de marca `bg-primary` (`#0057FF`) con la **textura de líneas** encima
-  (`ui-design-system/reference/textures.md` → `assets/textures/intersect-pattern.svg`).
+- **Fondo:** azul de marca fijo **`#0057FF`** (siempre, no `bg-primary`) con la **textura de
+  líneas** encima (`ui-design-system/reference/textures.md` → `assets/textures/intersect-pattern.svg`).
 - **Logo** InfoManager **negativo/blanco**, arriba a la izquierda (`assets/logos/infomanager-negative*.svg`).
 - **Headline** grande, blanco, dos líneas: *"Tu negocio, siempre bajo control."*
 - **Botón `← VOLVER`**: `variant="outline"` sobre azul (borde/texto blancos, fondo transparente).
 
 ### Panel derecho (formulario, ~43%)
-- **Fondo:** oscuro y plano (con tema base oscuro, `bg-background`; apuntar a un `#1A1A1A`–`#0b1220`).
-  No usar `bg-strong` (ese token invierte según tema).
+- **Fondo:** superficie oscura fija (`#0b1220`, con el `#1a2335` de `--card` si se diferencia una
+  tarjeta interna), siempre igual sin importar el tema activo de la app.
 - **Título** "Iniciá sesión" centrado.
 - **Google:** botón **blanco** full-width con ícono de Google → "Ingresá con tu cuenta Google".
 - **Divisor** con "o" (`Separator` + label centrado).
 - **Inputs** full-width `USUARIO O CORREO` y `CLAVE` — labels en **Geist Mono, MAYÚSCULAS**, muted.
-- **Botón `INGRESAR`**: `bg-primary` azul, full-width, label mono.
-- **`Checkbox`** "Mantener sesión iniciada".
-- **Link** "¿Olvidaste tu contraseña?" (mono, chico, centrado).
+- **Botón `INGRESAR`**: azul de marca fijo **`#0057FF`** (mismo criterio que el panel izquierdo,
+  no `bg-primary`), full-width, label mono mayúsculas.
+- **`Checkbox`** "MANTENER SESIÓN INICIADA" (mono, mayúsculas).
+- **Link** "¿OLVIDASTE TU CONTRASEÑA?" (mono, mayúsculas, chico, centrado).
 
 ## Componentes shadcn
 `login-02` (scaffold) + `Button`, `Input`, `Label`, `Checkbox`, `Separator`, `Card`.

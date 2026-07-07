@@ -3,18 +3,23 @@
 El restyle 1:1 se siente igual al original. Lo que hace que algo se vea "rediseñado" no es mover
 cosas, es aplicar un **sistema visual** tight. Estas reglas son obligatorias en cada restyle.
 
+> **Todas las medidas de esta página salen de `design.md`** (fuente de verdad). Este archivo suma
+> guía de refinamiento (foco, alineación, ritmo) sobre esa base; ante cualquier conflicto de
+> valores entre este archivo y `design.md`, **gana `design.md`**.
+
 ## 1. Tipografía (el lever más fuerte)
-Diferenciar claramente label / valor / título (hoy está todo plano y parejo):
-- **Título de sección:** 15px, peso 500, Inter, + ícono 16px + divisor sutil debajo.
-- **Label de campo:** 11–12px, MAYÚSCULAS, `tracking-wide`, `text-muted-foreground`, Geist Mono.
+Diferenciar claramente label / valor / título (hoy está todo plano y parejo). Tokens de
+`design.md`: **12/14/16/20/24px** (mono en 12/14):
+- **Título de sección:** 16px (`title-16`), peso 500, Inter/Suisse, + ícono 16px + divisor sutil debajo.
+- **Label de campo:** 12px mono (`label-12-mono`), MAYÚSCULAS, `tracking-wide`, `text-muted-foreground`.
 - **Valor / input:** 14px, peso 400–500, `text-foreground`.
-- **Números/importes:** Geist Mono `tabular-nums`. Totales 24–30px, peso 500.
+- **Números/importes:** Geist Mono `tabular-nums`. Totales 24px (`heading-24`), peso 500.
 - Solo **2 pesos** (400 y 500). Mono para labels/números/comandos; Suisse para contenido/títulos.
   (No poner TODO en mono: aplana la jerarquía.)
 
 ## 2. Espaciado (ritmo base 4px)
 - Padding de card **16px**. Gap entre campos **12px**. Gap entre grupos **16–24px**. Gap en toolbar **8px**.
-- Alto de fila de tabla **36–40px**, parejo. Nada de espacios disparejos.
+- Alto de fila de tabla **36–48px** (`design.md`), parejo. Nada de espacios disparejos.
 
 ## 3. Radius — **4px en TODO**
 Botones, inputs, cards, tabs, badges, dialogs. Sin pills, sin radios grandes.
@@ -37,7 +42,7 @@ escala resuelva a ~4px (ver `colors-tokens.md` §3b), no a la legacy (8-16px). V
   elemento más fuerte de la pantalla en ambos temas.
 
 ## 5. Botones (unificados)
-- **Alturas fijas:** sm 32px (`h-8`), default 36px (`h-9`), lg 40px (`h-10`). Padding horizontal 12–16px.
+- **Alturas fijas** (`design.md`): small 36px, default 40px, large 48px. Padding horizontal 12–18px.
   No `w-full` salvo en barras de acción.
 - Variantes por rol: primaria (azul sólido) · `success` (Grabar) · `destructive` (Eliminar) ·
   `outline`/`secondary` (resto) · `ghost` (cancelar/volver).
@@ -59,8 +64,9 @@ escala resuelva a ~4px (ver `colors-tokens.md` §3b), no a la legacy (8-16px). V
   computado real (ver `colors-tokens.md` §3b).
 
 ## 7. Inputs (uniformes)
-- Alto fijo **36px**, radius 4px, borde hairline, **focus ring 2px** con el acento. Label arriba
-  (estilo label). Valor `text-foreground` (legible en claro y oscuro).
+- Alto fijo (`design.md`): **40px** estándar, **36px** compacto (`input-compact`). Radius 4px,
+  borde hairline, **focus ring 2px** con el acento. Label arriba (estilo label). Valor
+  `text-foreground` (legible en claro y oscuro).
 
 ## 8. Estados / microinteracciones
 - Hover sutil (bg/borde), focus ring claro, fila/tab activa marcada con el acento. Transiciones

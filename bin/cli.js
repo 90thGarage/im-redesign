@@ -37,12 +37,35 @@ function pretty(p2) {
   return p2.startsWith(home) ? p2.replace(home, "~") : p2;
 }
 
+// Los .md de templates/commands usan frontmatter y sintaxis propias de Claude Code
+// (`argument-hint:`, `$ARGUMENTS`). Para otros agentes hay que adaptarlos al copiar:
+// sacar el `argument-hint:` y reemplazar `$ARGUMENTS` por una frase equivalente en texto plano.
+function transformCommandForAgent(txt) {
+  return txt
+    .replace(/^argument-hint:.*\n/m, "")
+    .replaceAll("$ARGUMENTS", "los argumentos que el usuario escribió después del comando");
+}
+// Copia los comandos a destino: verbatim para Claude, transformados para el resto de los agentes.
+async function copyCommands(srcDir, destDir, agent) {
+  await fs.ensureDir(destDir);
+  for (const f of fs.readdirSync(srcDir)) {
+    const src = path.join(srcDir, f);
+    if (fs.statSync(src).isDirectory()) continue;
+    if (agent === "claude") {
+      await fs.copy(src, path.join(destDir, f), { overwrite: true });
+    } else {
+      const txt = fs.readFileSync(src, "utf8");
+      fs.writeFileSync(path.join(destDir, f), transformCommandForAgent(txt));
+    }
+  }
+}
+
 const cli = cac("redesign-ui-kit");
 cli.option("--yes", "Instalar todo sin preguntar");
 cli.option("--agent <agent>", "claude | antigravity | cursor | codex");
 cli.option("--dir <dir>", "Directorio del proyecto (default: actual)");
 cli.option("--force", "Sobrescribir sin confirmar");
-cli.option("--skip-base", "No instalar las skills base (react-19, tailwind-4, typescript)");
+cli.option("--skip-base", "No instalar las skills base (react-19, tailwind-4)");
 cli.help();
 const parsed = cli.parse();
 const options = parsed.options;
@@ -117,7 +140,7 @@ async function installCore() {
   else if (options.yes) withBase = true;
   else {
     const b = await p.confirm({
-      message: "¿Instalar también las skills base del stack (React 19, Tailwind 4, TypeScript)? Útil si el proyecto no las tiene; omitir si ya seguís esas convenciones.",
+      message: "¿Instalar también las skills base del stack (React 19, Tailwind 4)? Útil si el proyecto no las tiene; omitir si ya seguís esas convenciones.",
       initialValue: true,
     });
     if (p.isCancel(b)) return false;
@@ -138,15 +161,19 @@ async function installCore() {
   await fs.copy(path.join(TEMPLATES, "skills"), skillsDir, { overwrite: true });
   p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "skills")).length} skills de InfoManager → ${pretty(skillsDir)}`);
   // comandos (proyecto para la mayoría; ~/.codex/prompts para Codex)
-  await fs.copy(path.join(TEMPLATES, "commands"), commandsDir, { overwrite: true });
+  // Para agentes que no son Claude, se transforma `argument-hint:`/`$ARGUMENTS` (sintaxis de Claude Code).
+  await copyCommands(path.join(TEMPLATES, "commands"), commandsDir, agent);
   p.log.success(`${fs.readdirSync(path.join(TEMPLATES, "commands")).length} comandos → ${pretty(commandsDir)}`);
   // skills base (opcional) -> van en la misma carpeta de skills
+  // El proyecto cliente es JS/JSX, no TypeScript: se excluye esa skill base del install por defecto
+  // (la carpeta templates/base-skills/typescript se deja en el kit, solo no se copia acá).
   const baseDir = path.join(TEMPLATES, "base-skills");
   if (withBase && fs.existsSync(baseDir)) {
     for (const entry of fs.readdirSync(baseDir)) {
+      if (entry === "typescript") continue;
       await fs.copy(path.join(baseDir, entry), path.join(skillsDir, entry), { overwrite: true });
     }
-    p.log.success(`skills base (react-19, tailwind-4, typescript) → ${pretty(skillsDir)}`);
+    p.log.success(`skills base (react-19, tailwind-4) → ${pretty(skillsDir)}`);
   } else {
     p.log.message("skills base omitidas");
   }

@@ -15,12 +15,13 @@ típica de que en repos nuevos el restyle quede roto).
 ## 1. Ejecutá `/im-setup`
 Corré **`/im-setup`** completo (seguí todos sus pasos): detectar
 stack, instalar shadcn + las primitivas del **inventario por tipo** (`reference/shadcn.md`),
-mergear tokens (claro + `.dark` + `@theme`), neutralizar fondo legacy (§3c), cargar fuentes libres.
+mergear tokens (base oscura en `:root` + override `.light` + `@theme`), neutralizar fondo legacy
+(§3c), cargar fuentes libres.
 Es **idempotente**: si ya está todo, no rompe nada.
 
 **Checkpoint (bloqueante):** antes de seguir, confirmá que el setup quedó OK —
-`components.json` existe, las primitivas del tipo están instaladas, `--primary` computa `#0057FF`
-(no el indigo default, §3d) y el build/typecheck pasa. **Si algo falló, no avances**: arreglá el
+`components.json` existe, las primitivas del tipo están instaladas, `--primary` computa `#4f86ff`
+en la base oscura y `#0057FF` bajo `.light` (no el indigo default, §3d) y el build pasa. **Si algo falló, no avances**: arreglá el
 setup o reportá el error. Nunca pases a la fase 2 con shadcn/tokens a medio instalar.
 
 ## 2. Ejecutá `/im-restyle <vista>`

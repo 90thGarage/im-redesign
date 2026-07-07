@@ -41,8 +41,8 @@ Control legacy  →  primitiva shadcn  →  tokens InfoManager (CSS vars del des
    **Proyecto JS (no TS):** en `components.json` dejá **`"tsx": false`** para que shadcn genere
    componentes **`.jsx`**, no `.tsx`. El repo del cliente es JavaScript; si queda `tsx: true` te
    mete TypeScript donde no va. Verificá que los componentes caigan en `src/components/ui/*.jsx`.
-3. **Tokens InfoManager** en el theme → ver `colors-tokens.md` (claro + `.dark` + escala de radius
-   §3b + fuentes libres). Mergeá **conservando** las vars propias del usuario, pero los valores
+3. **Tokens InfoManager** en el theme → ver `colors-tokens.md` (base oscura `:root` + override
+   `.light` + escala de radius §3b + fuentes libres). Mergeá **conservando** las vars propias del usuario, pero los valores
    semánticos (`--primary`, `--ring`, `--background`, `--border`…) **reemplazan** a los que escribió
    `shadcn init`; si no, `bg-primary` sale en el indigo default (morado), no en `#0057FF` (§3d).
    Verificá el computado: `--primary` = `rgb(0,87,255)` en claro.

@@ -29,6 +29,12 @@ description: >
 ## Estructura
 - **Toolbar (oscura):** título + subtítulo del listado; acciones **Ocultar listados · Imprimir ·
   Exportar · Ejecutar** (verde, primaria).
+  **Superficie fija (mismo criterio que `design-auth`):** la toolbar es siempre oscura, sin
+  importar el tema de la app — usá los valores de superficie oscura fijos (`--background: #0b1220`
+  / `--card: #1a2335` del tema oscuro de `colors-tokens.md`) como color literal, NO `bg-strong`
+  (ese token invierte según tema y en `.light` deja de ser oscuro). El texto de la toolbar usa
+  valores fijos claro-sobre-oscuro (blanco/`#e6edf3`), no `text-foreground`, para seguir siendo
+  legible en modo claro.
 - **Panel "Listados guardados":** lista con **+**; cada ítem con nombre, alcance (Pública/privada)
   y acciones (editar, renombrar, copiar, visibilidad, eliminar). Activo resaltado. Ocultable.
 - **Resultados:** "Resultados (N)" + aviso "tope alcanzado" + selector **Límite**. Tabla

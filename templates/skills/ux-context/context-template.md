@@ -12,8 +12,7 @@ ux-context/
 │   ├── abm.md
 │   ├── consultas.md
 │   ├── facturacion-rapida.md
-│   ├── comprobante.md
-│   └── auth.md
+│   └── comprobante.md         (Auth no lleva contexto (no se entrevista) — spec fija en design-auth)
 └── vistas/                    ← OPCIONAL: uno por vista concreta (particularidades / overrides)
     ├── factura-impos.md
     ├── abm-articulos.md

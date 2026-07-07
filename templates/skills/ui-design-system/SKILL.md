@@ -4,8 +4,9 @@ description: >
   Sistema de diseno InfoManager (React + Tailwind + shadcn/ui). Aplicar SIEMPRE que se
   escriba o edite JSX/CSS con cualquier color, boton, grilla, tabla, input, tab, panel o
   modal. Sistema CLARO y OPERACIONAL (azul/negro/neutros, radius 4px, Geist Mono para
-  comandos). Fuente de verdad: reference/design.md (del Figma). No usar para teclado (eso es
-  ux-patterns), solo lo visual.
+  comandos). Fuente de verdad: reference/design.md (del Figma). No usar para teclado (el
+  comportamiento de teclado/foco de las vistas existentes se preserva tal cual, regla de
+  restyle-view), solo lo visual.
 ---
 
 # UI Design System — InfoManager (shadcn/ui)

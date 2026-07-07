@@ -1,11 +1,12 @@
 # Selects, modales y drawers (shadcn)
 
-> Comportamiento (foco, teclado, cuando abrir) = ux-patterns. Aca, las primitivas.
+> Comportamiento (foco, teclado, cuando abrir): se preserva el de la vista existente tal cual
+> (regla de restyle-view); el estilo del foco visible sigue `refinement.md`. Aca, las primitivas.
 
 ## Dropdowns / selects
 Prohibido `<select>` nativo. Usar shadcn: `<Select>` (Radix) para listas estaticas; `<Combobox>`
 (Popover + Command) para busqueda o datos remotos/paginados (cliente, articulo, vendedor).
-```tsx
+```jsx
 <Select value={iva} onValueChange={setIva}>
   <SelectTrigger className="w-full font-mono"><SelectValue placeholder="Condición IVA" /></SelectTrigger>
   <SelectContent>
@@ -22,7 +23,7 @@ El menu es opaco por defecto (usa `--popover`).
   `AlertDialogAction` (primaria, foco) + `AlertDialogCancel`.
 - **`<Sheet>`**: sub-flujos laterales (Factura con datos, cobro con vuelto). Fusionar modales
   legacy en el flujo si solo existian por limitacion vieja.
-```tsx
+```jsx
 <AlertDialog open={open} onOpenChange={setOpen}>
   <AlertDialogContent>
     <AlertDialogHeader>
@@ -40,7 +41,7 @@ Nunca `alert()`/`confirm()` nativos.
 
 ## Toasts
 `sonner`. `<Toaster />` montado una vez en el layout raiz.
-```tsx
+```jsx
 import { toast } from "sonner";
 toast.success("Cliente guardado");
 toast("Ítem eliminado", { action: { label: "Deshacer", onClick: undo } });

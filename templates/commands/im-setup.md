@@ -18,7 +18,8 @@ en marcha, NO greenfield). Hacé los pasos vos, verificá y reportá. Idempotent
 2. **Dependencias** que falten: `clsx tailwind-merge` (+ las que pidan los componentes shadcn que se usen).
 3. **shadcn/ui**: `shadcn init` si no está (sin pisar config). **Proyecto JS:** dejá
    **`"tsx": false`** en `components.json` para que genere componentes **`.jsx`** (el repo es
-   JavaScript; con `tsx: true` te mete TypeScript). Agregá las primitivas base:
+   JavaScript; con `tsx: true` te mete TypeScript). El proyecto es JS/JSX: los componentes
+   generados deben quedar en `.jsx`, nunca introducir sintaxis TypeScript. Agregá las primitivas base:
    `button input label table tabs dialog alert-dialog sheet select checkbox textarea badge card command popover scroll-area separator skeleton tooltip dropdown-menu collapsible accordion calendar sonner`.
    Esta es la unión del **inventario por tipo** de `ui-design-system/reference/shadcn.md`; al
    reembellecer cada vista, confirmá que estén las de su fila (es bloqueante). Para **auth**,
@@ -29,9 +30,9 @@ en marcha, NO greenfield). Hacé los pasos vos, verificá y reportá. Idempotent
    y, si el proyecto tiene una escala legacy en `:root`, agregá el override **al final del CSS** (§3b).
 4b. **Neutralizar fondo legacy** (§3c): si `html`/`:root`/`body` tienen un fondo oscuro fijo
    (`--body-bg`, gradiente, `background-image`) o el tema claro legacy está keyeado en otra clase
-   (ej. `body.light-theme`) distinta del toggle `.dark`, agregá al final del CSS
-   `html, body { background: var(--background); background-image: none; }` + `:root{color-scheme:light}`
-   `.dark{color-scheme:dark}`. Evita que el oscuro se asome en overscroll en modo claro.
+   (ej. `body.light-theme`) distinta del override `.light`, agregá al final del CSS
+   `html, body { background: var(--background); background-image: none; }` + `:root{color-scheme:dark}`
+   `.light{color-scheme:light}`. Evita que el claro se asome en overscroll en modo oscuro.
 5. **Fuentes libres**: cargar Inter + Geist Mono + Space Grotesk desde Google Fonts (el
    `<link>` está en `colors-tokens.md`). Reemplazan a las pagas (Suisse/Neue Montreal) sin licencia.
    Verificar que carguen de verdad, no fallback.

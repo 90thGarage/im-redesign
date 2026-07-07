@@ -193,10 +193,10 @@ escribe `shadcn init`. Si el `:root{--primary: …}` del init (oklch/indigo) que
 CSS, gana el cascade y `bg-primary` resuelve a ese color, no a `#0057FF`.
 
 **Fix:**
-- Al pegar los tokens, **reemplazá** los valores del init (mismo `:root`/`.dark`), no los agregues
+- Al pegar los tokens, **reemplazá** los valores del init (mismo `:root`/`.light`), no los agregues
   aparte. Si quedan ambos, el bloque InfoManager debe ir **al final** del archivo para ganar.
-- Verificá que `--primary` resuelva a **`#0057FF`** (`rgb(0, 87, 255)`) en el navegador, en claro y
-  oscuro (en `.dark` es `#4f86ff`). Si te da un indigo tipo `#2563eb`/oklch, quedó el default.
+- Verificá que `--primary` resuelva a **`#4f86ff`** en oscuro (`:root`, base) y **`#0057FF`**
+  (`rgb(0, 87, 255)`) en claro (`.light`). Si te da un indigo tipo `#2563eb`/oklch, quedó el default.
 - Ningún componente debe **hardcodear** el color (`bg-[#2563eb]`, `bg-blue-600`, un `<Button>` con
   color propio): la acción primaria usa **`bg-primary`** (token), nunca una clase de color cruda.
 - Lo mismo para `--ring` (focus), `--accent`/`--sidebar-primary` (derivados del azul de marca):

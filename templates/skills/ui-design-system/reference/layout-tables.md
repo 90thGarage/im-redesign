@@ -88,7 +88,7 @@ es `navbar + 100vh`, que **supera** el viewport y genera scroll vertical.
 
 **Patrón correcto (layout raíz):**
 
-```tsx
+```jsx
 // Raíz de la app: una sola columna a pantalla completa, sin scroll de página
 <div className="h-screen flex flex-col overflow-hidden">
   <header className="shrink-0">…navbar / tab-bar…</header>

@@ -27,6 +27,10 @@ Revisá el restyle de **$ARGUMENTS**. El objetivo doble: que (a) se vea bien y e
       la base oscura; `#0057FF` en `.light`) — NO un indigo/morado del default de shadcn
       (`#2563eb`/oklch). Ningún botón hardcodea color (`bg-blue-600`, `bg-[#...]`); usan `bg-primary`.
       `--ring`/`--accent` tampoco quedaron en el indigo default.
+      **Excepción documentada — Auth (`design-auth`):** los dos paneles de login son **spec fija
+      theme-independiente**: deben computar azul `rgb(0, 87, 255)` (`#0057FF`) y superficie oscura
+      fija en **AMBOS** temas (no `#4f86ff` en oscuro). Ahí el color literal está permitido y NO es
+      un hallazgo; sí es hallazgo si el panel cambia de color al togglear el tema.
 - [ ] **Superficies diferenciadas:** las cards/paneles se leen por encima del fondo (no todo el
       mismo tono), en base oscura y en claro. Si al togglear solo cambia el fondo, está mal.
 - [ ] **Sin fondo legacy asomándose (§3c):** overscroll/rubber-band arriba y abajo → el rebote

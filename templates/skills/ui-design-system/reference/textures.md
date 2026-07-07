@@ -19,7 +19,7 @@ texturas ni gradientes decorativos.
 
 ## Ejemplo (panel de marca del login)
 
-```tsx
+```jsx
 <div className="relative overflow-hidden bg-primary text-primary-foreground">
   {/* textura decorativa */}
   <img

@@ -17,7 +17,7 @@ de mejora de UX consume — así no hace falta preguntarle al programador cosas 
 > atajos que usan sin mirar son oro.
 
 Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) · Comprobante**.
-(**Auth** existe como tipo pero **no se entrevista** — tiene spec fija en `design-auth.md`.)
+(**Auth** existe como tipo pero **no se entrevista** — tiene spec fija en `design-auth`.)
 
 ---
 
@@ -101,7 +101,7 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 ## Auth (login / register) — SIN entrevista
 
 **Auth no se entrevista.** Es la única vista con **spec fija** (no depende del uso): se implementa
-igual siempre. Definición completa en **`design-auth.md`** (base `shadcn login-02` + panel azul con
+igual siempre. Definición completa en **`design-auth`** (base `shadcn login-02` + panel azul con
 la textura de líneas + panel oscuro con el formulario).
 
 ---
@@ -133,4 +133,4 @@ Los temas comunes van en **todas**. Estos son los **específicos** por tipo.
 | Alta de usuarios: self vs admin | | | | | | ✓ |
 
 > La columna **Auth** se deja solo por completitud: en la práctica **no se entrevista** (spec fija
-> en `design-auth.md`).
+> en `design-auth`).

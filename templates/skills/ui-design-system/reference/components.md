@@ -8,7 +8,7 @@ shadcn estiladas con tokens; componer solo por legibilidad. `cn()` de `@/lib/uti
 > Reglas finas (tamaños fijos, color disciplinado solo por semántica, íconos solo en
 > principales/destructivas, radius 4px) en `refinement.md`. Resumen abajo.
  (label mono, 40px, radius 4px)
-```tsx
+```jsx
 <Button className="font-mono">Cobrar y emitir</Button>            // primaria AZUL. 1 por pantalla
 <Button className="font-mono bg-strong text-strong-foreground hover:bg-strong/90">Confirmar pago</Button>
 <Button variant="outline" className="font-mono">Cambiar</Button> // secundaria
@@ -19,16 +19,17 @@ Alturas 40/36/48px. Una accion dominante por pantalla; el resto outline/ghost. T
 `font-mono` en la variante base del Button del repo.
 
 ## Atajos de teclado (kbd)
-```tsx
-function Kbd({ children }: { children: React.ReactNode }) {
+```jsx
+function Kbd({ children }) {
   return <kbd className="ml-1.5 rounded-[var(--radius)] border border-border bg-muted px-1.5 py-0.5 font-mono text-[12px] text-muted-foreground">{children}</kbd>;
 }
 ```
 
 ## Tablas (shadcn `<Table>`, densas, NO flex de divs)
 Celdas con padding propio: separan solas. Filas 36-48px, headers mono, numeros a la derecha.
-Muchas columnas -> misma `<Table>` con `overflow-x-auto` (scrollea, no se encima). Ver
-`screenshot-to-react/reference/pos-grid.example.tsx`.
+Muchas columnas -> misma `<Table>` con `overflow-x-auto` (scrollea, no se encima). Patron: grilla
+densa de lineas de venta (POS/comprobante) — una fila por item, columnas codigo/descripcion/
+cantidad/precio/subtotal, edicion inline de cantidad, totales alineados a la derecha.
 
 ## Paneles
 `bg-card border border-border rounded-[var(--radius)]`, padding operacional 8-16px. Sin sombras
@@ -39,7 +40,9 @@ decorativas ni glassmorphism.
 - **Total dominante:** `<span className="font-mono text-3xl tabular-nums">$ 44.665,18</span>`.
 - **Descuento visible:** `dto>0` -> `<Badge>`; si 0, `0%` tenue.
 - **Cobro (drawer/Sheet) con vuelto:** metodos (Efectivo/Tarjeta/Transferencia-QR) seleccionables;
-  "Recibido" -> "Vuelto" en vivo; primaria "Confirmar pago y emitir". Ver `pos-checkout.example.tsx`.
+  "Recibido" -> "Vuelto" en vivo; primaria "Confirmar pago y emitir". Patron: `<Sheet>` lateral que
+  compone metodo de pago + input "Recibido" + "Vuelto" calculado + boton primario, sin tapar la
+  grilla de items de fondo.
 - **Targets tactiles:** botones/filas comodos; stepper de cantidad con `Input` + `+/-`.
 
 ## Composicion permitida
