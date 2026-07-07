@@ -39,6 +39,25 @@ npx shadcn@latest add login-02
       panel de marca (~57%)            panel oscuro (~43%)
 ```
 
+### El mockup es una plantilla de SLOTS, no una lista cerrada
+Los elementos de arriba son **slots**: incluí **solo los que la vista original tiene**, en su orden
+original. No agregues elementos que la app no tiene (si no hay login con Google, no va el botón;
+si no hay "mantener sesión", no va el checkbox; si no hay navegación previa, no va `VOLVER`).
+Campos reales de la vista que el mockup no contempla (ej. **EMPRESA / BASE DE DATOS** del login
+multi-empresa) van como inputs estándar dentro de la misma columna del formulario, en su posición
+original. La spec fija es el **layout y el estilo**, no el inventario de campos.
+
+### Distribución interna (valores concretos, no opcionales)
+- **Panel izquierdo:** `relative`, padding `p-10` a `p-12`. Logo **arriba a la izquierda** (no
+  centrado). Headline y botón `VOLVER` en el tercio inferior izquierdo, alineados a la izquierda.
+  Nada tocando los bordes del panel.
+- **Panel derecho:** `flex items-center justify-center`, padding `p-8` mínimo. El formulario es
+  **una columna centrada** (vertical y horizontal): `w-full max-w-[380px]`, `flex flex-col gap-4`
+  (`gap-6` entre bloques: título / formulario / links). Labels, inputs, botones y footer viven
+  DENTRO de esa columna — nunca pegados al borde del panel.
+- **Footer** (Ayuda, "by Infomanager", etc., si la vista los tiene): dentro de la misma columna o
+  con el mismo padding del panel, nunca en x=0.
+
 ### Spec fija: colores NO salen de tokens de tema
 Los dos paneles usan **color fijo, siempre igual, sin importar el tema** de la app (claro/oscuro):
 esta pantalla es la **única excepción documentada** a la regla "prohibido color literal" de
@@ -61,7 +80,11 @@ ambos temas — no puede depender de qué tema quedó activo la última vez.
 ### Panel derecho (formulario, ~43%)
 - **Fondo:** superficie oscura fija (`#0b1220`, con el `#1a2335` de `--card` si se diferencia una
   tarjeta interna), siempre igual sin importar el tema activo de la app.
-- **Título** "Iniciá sesión" centrado.
+- **Título** "Iniciá sesión" centrado, arriba de la columna del formulario.
+- **Logo: NO va en este panel.** El logo vive solo en el panel de marca (izquierdo), con el asset
+  del kit. Si la vista original renderiza su propio logo acá (ej. el ícono "im" legacy), se
+  **elimina** de este panel — es presentación, no lógica; queda cubierto por el logo del panel
+  izquierdo. No duplicar logos.
 - **Google:** botón **blanco** full-width con ícono de Google → "Ingresá con tu cuenta Google".
 - **Divisor** con "o" (`Separator` + label centrado).
 - **Inputs** full-width `USUARIO O CORREO` y `CLAVE` — labels en **Geist Mono, MAYÚSCULAS**, muted.
@@ -69,6 +92,12 @@ ambos temas — no puede depender de qué tema quedó activo la última vez.
   no `bg-primary`), full-width, label mono mayúsculas.
 - **`Checkbox`** "MANTENER SESIÓN INICIADA" (mono, mayúsculas).
 - **Link** "¿OLVIDASTE TU CONTRASEÑA?" (mono, mayúsculas, chico, centrado).
+
+### Mayúsculas y mono: por CSS, nunca reescribiendo textos
+Los labels y botones se ven en **Geist Mono MAYÚSCULAS** aplicando clases (`font-mono uppercase
+tracking-wide`) sobre el **string original de la vista** — no reescribas los textos. "Ingresar"
+queda `Ingresar` en el JSX y se ve `INGRESAR` por CSS. Así el estilo fijo no viola la regla de
+restyle-view de preservar los textos.
 
 ## Componentes shadcn
 `login-02` (scaffold) + `Button`, `Input`, `Label`, `Checkbox`, `Separator`, `Card`.
