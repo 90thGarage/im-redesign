@@ -4,30 +4,32 @@
 > compacto**: azul `#0057FF` + negro `#1A1A1A` + neutros, **radius 4px**, Inter (texto) +
 > **Geist Mono** (botones/labels/headers/numeros).
 
-## ⚠️ Tema por defecto = CLARO (es el contrato)
+## ⚠️ Tema base = OSCURO (este despliegue) · claro = override
 
-El `design.md` define un sistema **claro**: fondo `#F5F5F5`, **superficies blancas**, azul
-`#0057FF` como acento de marca / selección / **acción dominante única**, y negro `#1A1A1A` para
-acciones serias. Ese es el look objetivo del restyle. **No** apliques un dark theme genérico
-(navy plano) como default — eso es "no usar el `design.md`".
+La app del cliente (IM5) es **dark-first**: su `:root` es oscuro. Por eso, en este despliegue, el
+**tema base va en `:root` con los valores OSCUROS** de InfoManager, y el **claro es un override**
+(`.light` / la clase que use el toggle). **No** apliques el indigo/glass genérico que trae su CSS
+legacy — usá los tokens InfoManager (azul `#0057FF` de marca, `#4f86ff` en oscuro).
 
-- El **modo oscuro es opcional** y solo se implementa para **espejar un toggle que ya existe** en
-  el app. Aun así debe derivar del claro y cumplir, en CLARO **y** OSCURO:
-  - **Superficies diferenciadas:** `--card`/`--popover` se leen claramente **por encima** del
-    `--background` (no todo el mismo tono). Si en oscuro las cards se confunden con el fondo, subí
-    el `--card` y/o reforzá `--border`.
-  - **Acción dominante en color:** la única acción primaria de la pantalla (p. ej. **Cobrar /
-    Efectivo**) va en **azul** (`bg-primary`) o **negro** (`bg-strong`), nunca como botón claro
-    lavado. Los íconos/acciones secundarias (cámara, balanza) **no** deben tener más saturación
-    que la acción dominante.
-  - **Color solo por semántica:** Grabar/Confirmar = `success`; Eliminar = `destructive`; el resto
-    neutro. Una sola acción dominante por zona.
+Reglas que valen en **oscuro Y claro**:
+- **Superficies diferenciadas:** `--card`/`--popover` se leen claramente **por encima** del
+  `--background` (no todo el mismo tono). Si en oscuro las cards se confunden con el fondo, subí
+  `--card` y/o reforzá `--border`.
+- **Acción dominante en color:** la única acción primaria (p. ej. **Cobrar / Efectivo / Ingresar**)
+  va en **azul** (`bg-primary`), nunca como botón claro lavado. Los íconos/acciones secundarias
+  (cámara, balanza) **no** deben tener más saturación que la dominante.
+- **Color solo por semántica:** Grabar/Confirmar = `success`; Eliminar = `destructive`; el resto
+  neutro. Una sola acción dominante por zona.
+
+> El azul de marca es `#0057FF` (claro) / `#4f86ff` (oscuro). En base oscura, el default es `#4f86ff`.
 
 Todo va en `src/index.css`, debajo de `@import "tailwindcss";`.
 
 ## 1. Variables (en `src/index.css`)
 ```css
-:root {
+/* TEMA CLARO — override. Se activa con la clase del toggle claro del app.
+   (En IM5 el claro estaba keyeado en `body.light-theme` → `.light-theme` lo cubre.) */
+.light, .light-theme, [data-theme="light"] {
   --background: #F5F5F5;           --foreground: #1A1A1A;
   --card: #FFFFFF;                 --card-foreground: #1A1A1A;
   --popover: #FFFFFF;             --popover-foreground: #1A1A1A;
@@ -57,12 +59,15 @@ Todo va en `src/index.css`, debajo de `@import "tailwindcss";`.
   --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
 }
 
-/* MODO OSCURO — OPCIONAL (espeja un toggle existente; el contrato es el claro de arriba).
-   Derivado para que TODAS las superficies cambien Y se DIFERENCIEN entre sí: card/popover quedan
-   un escalón por encima del background, con bordes visibles, para no caer en un navy plano de un
-   solo tono. Apuntar el selector (.dark) a la clase/atributo que active el toggle del app
-   (puede ser .dark, .dark-theme o [data-theme="dark"]). */
-.dark {
+/* TEMA BASE = OSCURO → va en :root (es el default, alineado con la app dark-first del cliente).
+   Superficies DIFERENCIADAS: card/popover un escalón por encima del background, con bordes
+   visibles (no un navy plano). El claro es el override `.light` de arriba.
+   Las invariantes (radius, fuentes) viven acá, en la base. */
+:root {
+  --radius: 0.25rem;              /* 4px en TODO; no pills (igual en ambos temas) */
+  --font-sans: "Inter", system-ui, -apple-system, Arial, sans-serif;
+  --font-mono: "Geist Mono", Menlo, Consolas, monospace;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --background: #0b1220;            --foreground: #e6edf3;
   --card: #1a2335;                  --card-foreground: #e6edf3;   /* notoriamente > background */
   --popover: #1a2335;             --popover-foreground: #e6edf3;
@@ -147,40 +152,38 @@ cualquier escala legacy, así gana el cascade):
 ```
 Verificar el `border-radius` **computado real** en el navegador (debe dar ~4px, no 8-16px).
 
-## 3c. Fondo legacy en `html`/`body` (IMPORTANTE — se asoma el oscuro en modo claro)
+## 3c. Fondo legacy en `html`/`body` (IMPORTANTE — que el fondo siga el token, no el legacy)
 
-Misma familia de bug que §3b, pero con el **fondo de página**. Síntoma: en **modo claro**, al
-hacer overscroll/rubber-band (o con contenido más corto que el viewport) **se asoma un fondo
-oscuro** detrás del contenido. Causas típicas del CSS legacy:
+Misma familia de bug que §3b, pero con el **fondo de página**. Síntoma: al hacer overscroll/
+rubber-band (o con contenido más corto que el viewport) **se asoma un fondo del legacy** (gradiente/
+color fijo) detrás del contenido, distinto al del tema. Causas típicas del CSS legacy:
 
-- `html`/`:root` tienen un fondo oscuro fijo (p. ej. `--body-bg: #0b1020`, a veces con un
+- `html`/`:root` tienen un fondo fijo (p. ej. `--body-bg: #0b1020`, a veces con un
   `background-image`/gradiente) y `body` quedó transparente.
-- El tema **claro** legacy estaba keyeado en una clase que tu toggle nuevo **no** activa (ej.
-  `body.light-theme`), mientras el toggle nuevo usa `.dark` en `<html>`. Resultado: en claro no
-  hay ninguna clase activa → pintan los valores **oscuros** del legacy. El `main` con
-  `bg-background` lo tapa, pero el fondo de página sigue oscuro debajo y se asoma en los bordes.
+- El tema está keyeado en una clase que tu toggle **no** activa (ej. el claro en `body.light-theme`).
+  Con **base oscura**, si el toggle no matchea, el `main` con `bg-background` tapa pero el fondo de
+  página queda con el color legacy y se asoma en los bordes.
 
 **Fix (agregar al FINAL del CSS, después de cualquier regla legacy):**
 ```css
-/* html y body siguen el token del tema (claro/oscuro), no el fondo legacy */
+/* html y body siguen el token del tema, no el fondo legacy */
 html, body {
   background: var(--background);
   background-image: none;        /* mata gradientes/imágenes de fondo legacy */
 }
-/* el área de overscroll/scrollbar/rubber-band coincide con el tema */
-:root { color-scheme: light; }
-.dark { color-scheme: dark; }
+/* el área de overscroll/scrollbar/rubber-band coincide con el tema (base = oscuro) */
+:root { color-scheme: dark; }
+.light, .light-theme, [data-theme="light"] { color-scheme: light; }
 ```
-Si el fondo legacy se aplica con `!important` o con muy alta especificidad, igualá la
-especificidad (o sumá `!important` solo a estas dos reglas) — pero primero intentá sin él.
+Si el fondo legacy se aplica con `!important` o alta especificidad, igualá la especificidad (o
+sumá `!important` solo a estas dos reglas) — pero primero intentá sin él.
 
-**Y alineá el selector del toggle:** el bloque `.dark` debe activarse con la **misma** clase/
-atributo que usa el toggle (`.dark` en `<html>`, `.dark-theme`, `[data-theme="dark"]`…). No
-dejes el claro dependiendo de una clase legacy (`body.light-theme`) que ya nadie pone.
+**Y alineá el selector del toggle:** el override `.light` debe activarse con la **misma** clase/
+atributo que usa el toggle claro del app (en IM5 era `body.light-theme` → `.light-theme` lo cubre).
+La base (sin clase) queda **oscura**.
 
-**Verificar:** en claro, hacé overscroll arriba/abajo y confirmá que el rebote es claro
-(`#F5F5F5`), no oscuro; y que `html`/`body` computados toman `var(--background)` y
-`background-image: none`.
+**Verificar:** hacé overscroll arriba/abajo y confirmá que el rebote coincide con el tema (oscuro
+por defecto), y que `html`/`body` computados toman `var(--background)` y `background-image: none`.
 
 ## 3d. Color de marca no aplicado — colisión con los defaults de shadcn (IMPORTANTE)
 
@@ -231,16 +234,17 @@ Agregalo en `:root`, mapealo en `@theme`, usalo por clase. Color nuevo de marca:
 contra `design.md`.
 
 
-> **Modo oscuro (importante):** el toggle del app debe activar la clase/atributo del bloque
-> `.dark`. Si solo cambia el fondo, es porque los componentes NO usan tokens semanticos o la
-> clase del toggle no coincide con `.dark` — alinealas. Verificar que cards, tabla, inputs,
-> panel y textos cambien, no solo `body`.
+> **Cambio de tema (importante):** la base es **oscura** (`:root`); el toggle **claro** del app
+> debe activar `.light` (en IM5, `body.light-theme`). Si al togglear solo cambia el fondo, es
+> porque los componentes NO usan tokens semánticos o la clase del toggle no coincide con `.light`
+> — alinealas. Verificar que cards, tabla, inputs, panel y textos cambien, no solo `body`.
 
-## 8. Completitud del tema (claro = oscuro, sin huecos)
+## 8. Completitud del tema (base = override, sin huecos)
 
-Regla: **toda** variable definida en `:root` debe tener su override en `.dark` (salvo las que
-son iguales en ambos temas a propósito: `--radius`, la escala `--radius-*` y las `--font-*`).
-Si una variable existe en claro pero no en oscuro, ese componente se rompe al cambiar de tema.
+Regla: **toda** variable de color definida en `:root` (base oscura) debe tener su override en
+`.light` (salvo las invariantes a propósito: `--radius`, la escala `--radius-*` y las `--font-*`,
+que viven solo en `:root`). Si una variable existe en la base pero no en `.light`, ese componente
+se rompe al togglear a claro.
 
 Grupos que deben estar en **los dos** bloques (ya cubiertos arriba):
 - Base: `background/foreground`, `card(-foreground)`, `popover(-foreground)`.
@@ -252,9 +256,10 @@ Grupos que deben estar en **los dos** bloques (ya cubiertos arriba):
   `sidebar-accent(-foreground)`, `sidebar-border`, `sidebar-ring`.
 
 **Si agregás un componente shadcn que trae variables nuevas** (p. ej. gráficos →
-`--chart-1..5`), definí esas variables en `:root` **y** `.dark` y mapealas en `@theme`
+`--chart-1..5`), definí esas variables en `:root` (oscuro) **y** `.light` y mapealas en `@theme`
 (`--color-chart-1: var(--chart-1)`…). No las dejes con los defaults del init.
 
-**Verificación rápida (navegador, DevTools):** con el tema oscuro activo, inspeccioná el
-`computed` de un panel y un input y confirmá que `background`, `--card`, `--border` y `--input`
-tomaron los valores `.dark` (no los claros). Pasá por sidebar, tabla, inputs y botones.
+**Verificación rápida (navegador, DevTools):** en la base (sin clase de tema, = oscuro),
+inspeccioná el `computed` de un panel y un input y confirmá que toman los valores **oscuros**.
+Activá el toggle claro (`.light`) y confirmá que flipean a los valores claros. Pasá por sidebar,
+tabla, inputs y botones.

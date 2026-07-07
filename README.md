@@ -59,8 +59,8 @@ en loop. Si preferís ir paso a paso:
 
 ## Cómo funciona
 
-1. **Lee toda la vista** e infiere de cuál de los **5 tipos** es: Menú, ABM, Consultas,
-   Facturación rápida o Comprobante.
+1. **Lee toda la vista** e infiere de cuál de los **6 tipos** es: Menú, ABM, Consultas,
+   Facturación rápida, Comprobante o **Auth** (login/register).
 2. **Aplica el estándar visual** de ese tipo + el design system de InfoManager (tokens, shadcn,
    tipografía).
 3. **Reescribe solo la presentación** a shadcn + tokens, dejando todo conectado igual.

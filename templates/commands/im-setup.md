@@ -16,11 +16,17 @@ en marcha, NO greenfield). Hacé los pasos vos, verificá y reportá. Idempotent
 ## Pasos
 1. **Detectar stack** (React + Vite/Next, Tailwind, package manager).
 2. **Dependencias** que falten: `clsx tailwind-merge` (+ las que pidan los componentes shadcn que se usen).
-3. **shadcn/ui**: `shadcn init` si no está (sin pisar config), y agregar las primitivas base:
+3. **shadcn/ui**: `shadcn init` si no está (sin pisar config). **Proyecto JS:** dejá
+   **`"tsx": false`** en `components.json` para que genere componentes **`.jsx`** (el repo es
+   JavaScript; con `tsx: true` te mete TypeScript). Agregá las primitivas base:
    `button input label table tabs dialog alert-dialog sheet select checkbox textarea badge card command popover scroll-area separator skeleton tooltip dropdown-menu collapsible accordion calendar sonner`.
    Esta es la unión del **inventario por tipo** de `ui-design-system/reference/shadcn.md`; al
-   reembellecer cada vista, confirmá que estén las de su fila (es bloqueante).
-4. **Tokens**: mergear en el CSS las variables (claras + `.dark` completo) + `@theme` de `ui-design-system/reference/colors-tokens.md`. Incluí la **escala de radius** (`--radius-sm/md/lg/xl`) y, si el proyecto tiene una escala legacy en `:root`, agregá el override **al final del CSS** para que gane (§3b).
+   reembellecer cada vista, confirmá que estén las de su fila (es bloqueante). Para **auth**,
+   además: `npx shadcn@latest add login-02`.
+4. **Tokens**: mergear en el CSS las variables + `@theme` de `ui-design-system/reference/colors-tokens.md`.
+   **Tema base = OSCURO** (la app del cliente es dark-first): los valores oscuros van en `:root`
+   (base) y los claros como override (`.light`). Incluí la **escala de radius** (`--radius-sm/md/lg/xl`)
+   y, si el proyecto tiene una escala legacy en `:root`, agregá el override **al final del CSS** (§3b).
 4b. **Neutralizar fondo legacy** (§3c): si `html`/`:root`/`body` tienen un fondo oscuro fijo
    (`--body-bg`, gradiente, `background-image`) o el tema claro legacy está keyeado en otra clase
    (ej. `body.light-theme`) distinta del toggle `.dark`, agregá al final del CSS

@@ -62,4 +62,6 @@ busqueda de item desprendida del listado, accion primaria escondida bajo scroll,
   viewport crítico operacional.
 - `reference/components.md` — mapeo a primitivas shadcn + patrones POS.
 - `reference/modals-dropdowns.md` — Select/Combobox y Dialog/AlertDialog/Sheet.
+- `reference/textures.md` — **regla de texturas SVG** (usar siempre `intersect-pattern.svg`).
 - `assets/logos/` — logos InfoManager (SVG).
+- `assets/textures/intersect-pattern.svg` — patrón de líneas (fondos con textura, ej. login).

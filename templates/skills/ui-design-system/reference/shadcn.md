@@ -38,6 +38,9 @@ Control legacy  →  primitiva shadcn  →  tokens InfoManager (CSS vars del des
    npx shadcn@latest init        # sin pisar config existente
    npm i clsx tailwind-merge
    ```
+   **Proyecto JS (no TS):** en `components.json` dejá **`"tsx": false`** para que shadcn genere
+   componentes **`.jsx`**, no `.tsx`. El repo del cliente es JavaScript; si queda `tsx: true` te
+   mete TypeScript donde no va. Verificá que los componentes caigan en `src/components/ui/*.jsx`.
 3. **Tokens InfoManager** en el theme → ver `colors-tokens.md` (claro + `.dark` + escala de radius
    §3b + fuentes libres). Mergeá **conservando** las vars propias del usuario, pero los valores
    semánticos (`--primary`, `--ring`, `--background`, `--border`…) **reemplazan** a los que escribió
@@ -114,6 +117,16 @@ Comando típico (ejemplo ABM):
 
 ```bash
 npx shadcn@latest add button input label select table tabs checkbox textarea card separator badge dialog alert-dialog dropdown-menu scroll-area skeleton tooltip popover command sonner
+```
+
+### Auth (tipo aparte — bloque `login-02`)
+
+Auth no usa la matriz de arriba: parte de un **bloque** de shadcn y un set chico de primitivas
+(ver `design-auth`).
+
+```bash
+npx shadcn@latest add login-02
+npx shadcn@latest add button input label checkbox separator card
 ```
 
 ## Flujo por vista

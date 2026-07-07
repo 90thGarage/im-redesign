@@ -54,6 +54,9 @@ En el resto: se ve mejor, se usa igual.
 - **Consultas:** solo lectura, listados guardados, Ejecutar/Exportar. → `design-consultas`
 - **Facturación rápida:** buscador de productos + carrito + total + cobro. → `design-facturacion-rapida`
 - **Comprobante / Facturación completa:** cabecera + ítems + totales + CAE/fiscal. → `design-comprobante`
+- **Auth:** pantalla de login/registro (usuario/clave, Google, "mantener sesión"). → `design-auth`
+  ⚠️ Auth NO es un restyle 1:1: es **spec fija** (bloque `login-02` + paneles). Seguí `design-auth`
+  tal cual en vez de preservar el markup viejo. La lógica de auth (endpoints, Google, biometría) sí se preserva.
 - Si no estás seguro del tipo, **preguntá** antes de reescribir.
 
 ## Reglas duras

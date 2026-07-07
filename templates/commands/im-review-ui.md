@@ -17,21 +17,22 @@ Revisá el restyle de **$ARGUMENTS**. El objetivo doble: que (a) se vea bien y e
 - [ ] Componentes **shadcn** + tokens; cero colores arbitrarios; radius 4px; respeta claro/oscuro.
 - [ ] **Radius computado real ~4px** (no 8-16px). Ojo escala legacy `--radius-md/lg` en `:root`;
       la escala `rounded-*` debe resolver a 4px (ver colors-tokens §3b). Medir en el navegador.
-- [ ] **Tema por defecto = CLARO del `design.md`** (fondo `#F5F5F5`, superficies blancas, azul
-      `#0057FF`). No es un dark theme genérico (navy plano). El oscuro solo espeja un toggle existente.
-- [ ] **Acción dominante en color:** Cobrar/Efectivo/Emitir va en **azul** (`bg-primary`) o **negro**
-      (`bg-strong`), no como botón claro/lavado. Los íconos/acciones secundarias (cámara, `+`) **no**
-      tienen más saturación que la dominante (jerarquía no invertida).
-- [ ] **El azul de marca es el real (§3d):** `--primary` computa `#0057FF` (`rgb(0,87,255)`) en
-      claro y `#4f86ff` en oscuro — NO un indigo/morado del default de shadcn (`#2563eb`/oklch).
-      Ningún botón hardcodea color (`bg-blue-600`, `bg-[#...]`); usan `bg-primary`. `--ring`/`--accent`
-      tampoco quedaron en el indigo default.
-- [ ] **Superficies diferenciadas en oscuro:** las cards/paneles se leen por encima del fondo
-      (no todo el mismo tono). Si el toggle solo cambia el fondo, está mal.
-- [ ] **Sin fondo legacy asomándose (§3c):** en CLARO, overscroll/rubber-band arriba y abajo →
-      el rebote es claro (`#F5F5F5`), no oscuro. `html`/`body` computan `var(--background)` y
-      `background-image: none`; el toggle `.dark` está keyeado a la clase real (no quedó el claro
-      dependiendo de `body.light-theme` legacy).
+- [ ] **Tema base = OSCURO** (la app es dark-first): la base (`:root`, sin clase) es oscura con
+      tokens InfoManager; el **claro** es override (`.light`). No es el indigo/glass genérico del
+      CSS legacy del cliente.
+- [ ] **Acción dominante en color:** Cobrar/Efectivo/Ingresar/Emitir va en **azul** (`bg-primary`),
+      no como botón claro/lavado. Los íconos/acciones secundarias (cámara, `+`) **no** tienen más
+      saturación que la dominante (jerarquía no invertida).
+- [ ] **El azul de marca es el real (§3d):** `--primary` computa el azul InfoManager (`#4f86ff` en
+      la base oscura; `#0057FF` en `.light`) — NO un indigo/morado del default de shadcn
+      (`#2563eb`/oklch). Ningún botón hardcodea color (`bg-blue-600`, `bg-[#...]`); usan `bg-primary`.
+      `--ring`/`--accent` tampoco quedaron en el indigo default.
+- [ ] **Superficies diferenciadas:** las cards/paneles se leen por encima del fondo (no todo el
+      mismo tono), en base oscura y en claro. Si al togglear solo cambia el fondo, está mal.
+- [ ] **Sin fondo legacy asomándose (§3c):** overscroll/rubber-band arriba y abajo → el rebote
+      coincide con el tema (oscuro por defecto), no el gradiente/indigo legacy. `html`/`body`
+      computan `var(--background)` y `background-image: none`; el override `.light` está keyeado a
+      la clase real del toggle (en IM5, `body.light-theme`).
 - [ ] **Bordes por token y consistentes:** todo borde usa `border-border` (`divider`/`--input`
       donde corresponda); cero `border-gray/slate-*`, `border-white/xx` ni hex sueltos. Hairline
       1px, mismo peso y tono en cards/inputs/tabla/rail. En oscuro sutil (no línea blanca marcada);
