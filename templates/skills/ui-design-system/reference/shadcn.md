@@ -35,8 +35,12 @@ Control legacy  →  primitiva shadcn  →  tokens InfoManager (CSS vars del des
 2. **Instalar si falta** (Vite + Tailwind 4; ajustar al package manager del repo):
    ```bash
    npm install -D tailwindcss @tailwindcss/vite
-   npx shadcn@latest init        # sin pisar config existente
+   # OJO: `shadcn init` 4.x es interactivo (ignora -y, cuelga en automatización). NO usarlo:
+   # escribir components.json a mano (tsx:false, style new-york, base radix, alias @/*)
+   # + src/lib/utils.js con cn(), y usar `shadcn add -y` (no-interactivo, genera .jsx).
    npm i clsx tailwind-merge
+   # Runtime de shadcn — `shadcn add` 4.x NO lo instala solo (el build pasa en falso sin él):
+   npm i lucide-react class-variance-authority radix-ui cmdk next-themes react-day-picker sonner
    ```
    **Proyecto JS (no TS):** en `components.json` dejá **`"tsx": false`** para que shadcn genere
    componentes **`.jsx`**, no `.tsx`. El repo del cliente es JavaScript; si queda `tsx: true` te

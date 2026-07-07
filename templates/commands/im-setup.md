@@ -15,8 +15,17 @@ en marcha, NO greenfield). Hacé los pasos vos, verificá y reportá. Idempotent
 
 ## Pasos
 1. **Detectar stack** (React + Vite/Next, Tailwind, package manager).
-2. **Dependencias** que falten: `clsx tailwind-merge` (+ las que pidan los componentes shadcn que se usen).
-3. **shadcn/ui**: `shadcn init` si no está (sin pisar config). **Proyecto JS:** dejá
+2. **Dependencias** que falten: `clsx tailwind-merge` **+ el runtime de shadcn**:
+   `lucide-react class-variance-authority radix-ui cmdk next-themes react-day-picker sonner`.
+   **`shadcn add` 4.x NO instala estas deps solo** y el build de setup pasa en falso sin ellas
+   (nada las importa hasta el primer restyle → tree-shaking las oculta); el primer import de un
+   componente rompe. Nota: shadcn 4.x usa el paquete unificado `radix-ui`, no los
+   `@radix-ui/react-*` sueltos.
+3. **shadcn/ui**: **`shadcn init` 4.x es interactivo** — abre un "preset picker" e ignora `-y`,
+   así que **cuelga en automatización**. Camino determinista: si no hay `components.json`,
+   **escribilo a mano** (`"tsx": false`, `"style": "new-york"`, base `radix`, alias `@/*`), creá
+   `src/lib/utils.js` con `cn()`, y usá `npx shadcn@latest add -y ...` (no-interactivo, respeta
+   `tsx: false`, genera `.jsx`). **Proyecto JS:** dejá
    **`"tsx": false`** en `components.json` para que genere componentes **`.jsx`** (el repo es
    JavaScript; con `tsx: true` te mete TypeScript). El proyecto es JS/JSX: los componentes
    generados deben quedar en `.jsx`, nunca introducir sintaxis TypeScript. Agregá las primitivas base:

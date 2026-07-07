@@ -110,3 +110,10 @@ auth quedan igual — esto es solo la capa visual.
 ## Register
 Si hay pantalla de registro, reusar el mismo layout de dos paneles (marca + formulario) cambiando
 los campos del formulario. Quién crea usuarios (self vs admin) depende del producto — no inventar.
+
+## Notas de implementación
+- **Login como pantalla raíz:** si no hay pantalla previa a la que volver, **omití el botón
+  `← VOLVER`** del panel de marca — un botón sin destino es "inventar" (regla de slots).
+- **Toggle de tema:** si la vista original lo trae, **preservá su lógica** (persiste la
+  preferencia y aplica la clase al `body` para el resto de la app), aunque el login sea de color
+  fijo y el toggle no lo recoloree visualmente. Es el comportamiento esperado, no un bug.
