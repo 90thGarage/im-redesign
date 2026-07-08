@@ -21,6 +21,21 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 
 ---
 
+## Mecánica de la sesión
+
+- **Duración:** apuntá a **20–30 min** por tipo de vista.
+- **Si una persona usa varios tipos** (dueño de local chico que hace de todo), armá **una sesión
+  combinada** priorizando los tipos que más usa — no la sientes a hacer 5 entrevistas seguidas.
+- **Pedile que comparta/muestre la pantalla** mientras camina el "camino normal" (la tarea que
+  hace siempre). El comportamiento observado vale más que lo que recuerda de memoria: si dice
+  "yo hago A" pero en la pantalla hace B, quedate con B.
+- Las preguntas más **reflexivas** (dolores, qué sería "mejor") van al final, después de haber
+  visto la tarea real.
+- **Pilotala** con la primera persona que entrevistes: si una pregunta no se entiende o no aplica,
+  ajustá la redacción antes de seguir con el resto.
+
+---
+
 ## Preguntas comunes (todas las vistas)
 
 **Rol y frecuencia**
@@ -31,14 +46,28 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 - ¿La usás en compu con teclado, en pantalla táctil, tablet? ¿Con lector, balanza, etc.?
 - ¿Trabajás más con teclado o con mouse/dedo?
 - ¿Qué teclas/atajos apretás **sin mirar** (de memoria)? ¿Cuáles serían un desastre si cambiaran?
+- ¿Trabajás de pie o sentado? ¿La terminal/compu la compartís con alguien más o es solo tuya?
+- ¿Tenés lector de código, balanza u otro aparato conectado ahí? ¿Te interrumpen seguido mientras
+  trabajás en esta pantalla (cliente, teléfono, otra tarea)?
 
 **Tarea principal**
 - ¿Cuál es la cosa que hacés **más veces** acá?
 - Contame el **paso a paso** de esa tarea, como si me enseñaras (el "camino normal").
 - ¿Cuántas veces por día/hora hacés eso?
+- ¿Qué pasa cuando te **interrumpen** a mitad de la tarea? ¿Cómo retomás?
 
-**Dolores**
-- ¿Qué es lo que más te **hace perder tiempo** o te molesta hoy?
+**Flujo (antes / después / desvíos)**
+- ¿Qué hace que **abras esta pantalla**? (llegó un cliente, un llamado, cierre de caja, te lo
+  pidió alguien...)
+- ¿**De dónde venís** cuando la abrís, y **qué hacés apenas terminás**? (otra pantalla, papel,
+  WhatsApp, la caja...)
+- ¿Cuándo el paso a paso **se desvía** del normal? Contame la **última vez** que tuviste que salir
+  a mitad de camino a hacer otra cosa y volver.
+
+**Dolores (anclado a un hecho concreto, no en general)**
+- Contame la **última vez** que esta tarea te salió mal: ¿qué pasó exactamente? ¿qué te costó
+  (tiempo perdido, plata, cliente esperando)?
+- Ahora contame una vez que te salió **redonda**, rápida y sin drama: ¿qué fue distinto?
 - ¿Dónde te **equivocás** seguido o tenés que rehacer algo?
 - Si pudieras pedir **una** cosa que te haga la vida más fácil acá, ¿cuál sería?
 
@@ -52,6 +81,8 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 
 **Qué sería "mejor"**
 - Si esta pantalla quedara "genial" para vos, ¿qué tendría que pasar?
+- ¿Qué te haría decir que esta pantalla **quedó mejor**? (en tus palabras — esto define el
+  criterio de éxito, no lo inventa el equipo)
 
 ---
 
@@ -60,8 +91,10 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 - ¿Cómo llegás a lo que buscás: por **favoritos**, **búsqueda**, o de **memoria**?
 - ¿Cuántas vistas tenés **abiertas a la vez**? ¿Te perdés entre las pestañas?
 - ¿Marcás favoritos? ¿Los usás de verdad?
-- ¿Cambiás de **empresa / base / sucursal** seguido? ¿Cómo?
+- Si se te cierra o recarga una pestaña con datos a medio cargar, ¿perdés algo? ¿Te pasó?
+- ¿Cambiás de **empresa / base / sucursal** seguido? ¿Cómo? *(contexto, no cambia el diseño)*
 - ¿El menú te queda a mano o tenés que buscar mucho para llegar a lo de siempre?
+  *(contexto, no cambia el diseño)*
 
 ## ABM (altas/bajas/modificaciones)
 
@@ -71,6 +104,7 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 - ¿Usás los **filtros por columna** y el orden? ¿Cuáles?
 - ¿Copiás registros parecidos ("alta rápida" / copiar)? ¿Con qué frecuencia?
 - ¿Qué te frena para grabar (validaciones, campos obligatorios que no sabías)?
+- El detalle, ¿lo usás **entero** o casi siempre **una sola pestaña/sección**? ¿Cuáles?
 
 ## Consultas (listados / reportes)
 
@@ -78,7 +112,10 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 - ¿Compartís esos listados con otros o son tuyos?
 - ¿**Exportás a Excel / imprimís**? ¿Para qué lo usás después?
 - ¿Mirás los resultados en pantalla o exportás y trabajás afuera?
-- ¿Te importa el **límite** de filas / que avise cuando hay muchas?
+- ¿Qué **columnas mirás sí o sí**, y cuáles casi nunca?
+- ¿Cuántos resultados suele traer una consulta tuya: **decenas, cientos, miles**?
+- ¿Te pasó de trabajar sobre un listado al que le **faltaban filas** (porque cortó en un tope)
+  sin darte cuenta? Contame esa vez.
 
 ## Facturación rápida (POS)
 
@@ -89,6 +126,8 @@ Tipos de vista: **Menú/shell · ABM · Consultas · Facturación rápida (POS) 
 - ¿Qué te **frena en hora pico**? ¿Cuántos ítems por venta, más o menos?
 - ¿Qué **atajos** son sagrados? (Escanear, Enter para cobrar, ESC, balanza P/+/R…)
 - Si se cae internet, ¿seguís vendiendo (offline)? ¿Cómo te das cuenta?
+- ¿Qué hacés si **cargaste mal un ítem** o el cliente **se arrepiente a mitad de venta**?
+- ¿Imprimís **ticket**? En hora pico, ¿esperás a la impresora?
 
 ## Comprobante / Facturación completa
 

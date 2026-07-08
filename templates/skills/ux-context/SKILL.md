@@ -14,8 +14,15 @@ existe y se mejora **cómo se usa**, guiándose por **contexto de uso real** lev
 
 ## Qué hay acá
 
-- **`interview-guide.md`** — preguntas para los **usuarios reales** + matriz de qué se pregunta por tipo.
-- **`context-template.md`** — el **formato** del archivo de contexto (dos capas: por tipo + por vista).
+- **`interview-guide.md`** — preguntas para los **usuarios reales** + mecánica de la sesión + matriz
+  de qué se pregunta por tipo. Las preguntas se anclan a **hechos concretos** (la última vez que
+  pasó, mostrando la pantalla), no a opiniones u opciones hipotéticas.
+- **`context-template.md`** — el **formato** del archivo de contexto (dos capas: por tipo + por
+  vista); las oportunidades de UX (sección 7) van como registros con `evidencia` y `solidez`, y
+  la definición de "mejor" (sección 8) sale de la pregunta de cierre, en palabras del usuario.
+  Cada tarea de la sección 2 lleva además un bloque `flujo` (disparador, de dónde viene, pasos,
+  desvíos, a dónde sigue) que permite reconstruir el recorrido del cliente entre pantallas
+  componiendo varios archivos, no solo el uso dentro de una vista.
 - **`examples/`** — un archivo de contexto **de ejemplo por tipo** (referencia, sin validar):
   `menu`, `abm`, `consultas`, `facturacion-rapida`, `comprobante`.
 

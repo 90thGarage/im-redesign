@@ -13,11 +13,28 @@ confianza: baja
 - Administrativos / encargados de local. Uso **frecuente** (cargan y mantienen datos).
 - Desktop con teclado; tabla arriba (maestro) + detalle abajo con pestañas.
 - Mezcla de teclado y mouse.
+- Entorno: sentado, terminal propia, interrupciones ocasionales (consultas de otros).
+- Hardware presente: ninguno específico.
 
 ## 2. Tareas frecuentes (ordenadas por frecuencia)
 1. **Buscar un registro y editar** un dato puntual (precio, stock, un campo) → Grabar.
+   - frecuencia: decenas de veces por día
+   - volumen: 1 registro por edición
+   - costo del último error: ninguna — hipótesis del equipo
+   - flujo:
+     disparador: cambió un precio/stock o se lo pidió otro sector
+     viene de: menú/pestaña ya abierta, o llegó desde Consultas al ver el dato desactualizado
+     pasos: 1. buscar el registro 2. entrar en modo edición 3. cambiar el campo 4. grabar
+     desvíos: no lo encuentra por el filtro → prueba otro criterio de búsqueda → sigue igual
+     sigue en: vuelve al listado/consulta que lo trajo, o sigue con el próximo registro a editar
 2. **Alta de uno nuevo** (menos frecuente que editar), a veces con **Copiar** de uno parecido.
+   - frecuencia: algunas veces por semana
+   - volumen: 1 registro por alta
+   - costo del último error: ninguna — hipótesis del equipo
 3. **Revisar/consultar** sin editar (modo consulta).
+   - frecuencia: varias veces por día
+   - volumen: 1–10 registros por consulta
+   - costo del último error: ninguna — hipótesis del equipo
 
 ## 3. Interacción actual (lo que NO se puede romper)
 - **Modo consulta vs edición** (campos bloqueados hasta Editar/Nuevo) y el estado de la toolbar.
@@ -37,11 +54,25 @@ confianza: baja
 ## 6. Bajo presión
 - Editar y grabar rápido sin errores de modo; ver claro si quedó guardado.
 
-## 7. Oportunidades de UX (hipótesis del equipo — propuesto, validar)
-- **[propuesto]** Estado de **modo (consulta/edición) mucho más visible** (no equivocarse).
-- **[propuesto]** Validación **inline** cerca del campo, antes de grabar.
-- **[propuesto]** Jerarquía de campos: destacar los usados siempre, agrupar/colapsar los raros.
-- **[propuesto]** Feedback claro de "Grabado" (toast) y de qué falta si no.
+## 7. Oportunidades de UX
+- **[propuesto]** cambio: estado de **modo (consulta/edición) mucho más visible** (no equivocarse)
+  evidencia: ninguna — hipótesis del equipo
+  prioridad: alta
+  solidez: baja
+- **[propuesto]** cambio: validación **inline** cerca del campo, antes de grabar
+  evidencia: ninguna — hipótesis del equipo
+  prioridad: media
+  solidez: baja
+- **[propuesto]** cambio: jerarquía de campos, destacar los usados siempre y agrupar/colapsar los raros
+  evidencia: ninguna — hipótesis del equipo
+  prioridad: media
+  solidez: baja
+- **[propuesto]** cambio: feedback claro de "Grabado" (toast) y de qué falta si no
+  evidencia: ninguna — hipótesis del equipo
+  prioridad: media
+  solidez: baja
 
 ## 8. Definición de "mejor"
-- Menos errores de "no se guardó"; editar/grabar más rápido; encontrar el campo correcto sin buscar.
+- Pendiente de entrevista real: "menos errores de no se guardó; editar/grabar más rápido;
+  encontrar el campo correcto sin buscar" es una hipótesis del equipo, no una respuesta textual
+  de un usuario todavía.
