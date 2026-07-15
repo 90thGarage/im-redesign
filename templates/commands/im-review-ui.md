@@ -10,8 +10,14 @@ Revisá el restyle de **$ARGUMENTS**. El objetivo doble: que (a) se vea bien y e
 - [ ] **Misma API pública**: mismo `export`, mismos `props`, misma ruta (drop-in).
 - [ ] **Lógica/estado/handlers/efectos/endpoints/validaciones/refs** intactos (sin cambios de comportamiento).
 - [ ] **Teclado y atajos** preservados.
-- [ ] **Textos, labels y orden de campos** sin cambios.
-- [ ] El diff NO toca lógica (solo JSX/estilos).
+- [ ] **Textos, labels y orden de campos** sin cambios (en modo **restyle**; en un **redesign**
+      el orden/flujo puede cambiar si tiene evidencia de `ux-context`, pero los textos y términos
+      del dominio no deberían cambiar igual).
+- [ ] El diff NO toca lógica (solo JSX/estilos, o estructura+UX si es un redesign con evidencia).
+
+**Nota — vistas rediseñadas:** si la vista pasó por `/im-redesign`, los cambios de
+estructura/flujo respaldados por evidencia de `ux-context` son esperados y **no son hallazgo
+crítico**; la preservación de API/lógica/endpoints aplica igual en ambos modos.
 
 ## Estándar visual (design system)
 - [ ] Componentes **shadcn** + tokens; cero colores arbitrarios; radius 4px; respeta claro/oscuro.
@@ -46,7 +52,9 @@ Revisá el restyle de **$ARGUMENTS**. El objetivo doble: que (a) se vea bien y e
       totales) con `text-foreground`; muted solo para hints (AA). Nada lavado en modo claro.
 - [ ] **Contraste de inputs**: el valor con `text-foreground` (alto contraste), incluso en
       consulta/disabled (sin `opacity-50` que lo vuelva ilegible). Placeholder/labels en muted.
-- [ ] Coincide con el `design-<tipo>` correspondiente (estructura del tipo).
+- [ ] Coincide con el `design-<tipo>` correspondiente (estructura del tipo). En un **restyle** se
+      mantiene la estructura de la vista original (no exigir el layout de referencia); en un
+      **redesign** (`/im-redesign`) sí debe coincidir con el layout del tipo.
 
 ## shadcn (cierre — ver `ui-design-system/reference/shadcn.md`)
 - [ ] Cero controles HTML/CSS crudos (`<button>`/`<input>`/`<select>`) ni `react-select` donde

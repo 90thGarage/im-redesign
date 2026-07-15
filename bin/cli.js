@@ -179,7 +179,7 @@ async function installCore() {
   }
   s.stop("Archivos copiados");
   if (agentDef.commandsRoot === "home") {
-    p.log.info(`Codex: los slash commands quedaron en ${pretty(commandsDir)} (global). Reiniciá Codex y se ven como /im-go, /im-setup, /im-restyle, /im-review-ui.`);
+    p.log.info(`Codex: los slash commands quedaron en ${pretty(commandsDir)} (global). Reiniciá Codex y se ven como /im-go, /im-setup, /im-restyle, /im-redesign, /im-review-ui.`);
   }
   return true;
 }
@@ -188,9 +188,10 @@ const CMD_HELP = {
   "im-go": { args: "<ruta-o-vista>", desc: "TODO EN UNO: setup (si hace falta) → restyle → review (.md) → arregla. Recomendado.", input: "indicá la vista; hace el resto solo" },
   "im-setup": { args: "", desc: "prepara el proyecto (shadcn + tokens + fuentes), sin romper nada", input: "no requiere nada" },
   "im-restyle": { args: "<ruta-o-vista>", desc: "reembellece una vista preservando API y lógica", input: "indicá el archivo/carpeta de la vista" },
+  "im-redesign": { args: "<ruta-o-vista>", desc: "rediseña una vista: layout estándar del tipo + mejoras de UX con contexto real, preservando lógica", input: "indicá el archivo/carpeta de la vista" },
   "im-review-ui": { args: "<ruta-o-vista>", desc: "verifica que el restyle no rompió nada y quedó estándar", input: "la vista reembellecida (con git diff si hay)" },
 };
-const CMD_ORDER = ["im-go", "im-setup", "im-restyle", "im-review-ui"];
+const CMD_ORDER = ["im-go", "im-setup", "im-restyle", "im-redesign", "im-review-ui"];
 
 function helpCore() {
   const present = new Set(readCommands().map((c) => c.name));
@@ -201,7 +202,7 @@ function helpCore() {
     p.log.message(`/${name} ${h.args}`.trim() + `  —  ${h.desc}`);
     p.log.message(`     ↳ ${h.input}`);
   }
-  p.log.message("Simple:  /im-go <vista>  (hace todo)   ·   Avanzado:  /im-setup → /im-restyle → /im-review-ui");
+  p.log.message("Simple:  /im-go <vista>  (hace todo)   ·   Avanzado:  /im-setup → /im-restyle (o /im-redesign) → /im-review-ui");
 }
 
 function licenseCore() {

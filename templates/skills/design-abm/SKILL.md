@@ -2,7 +2,7 @@
 name: design-abm
 description: >
   Estándar visual del tipo ABM (alta/baja/modificación): toolbar + grilla maestra + detalle
-  (con o sin pestañas). Usar cuando restyle-view infiere que la vista es un ABM. Define
+  (con o sin pestañas). Usar cuando restyle-view o redesign-view infiere que la vista es un ABM. Define
   estructura, componentes shadcn y qué preservar.
 ---
 

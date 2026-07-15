@@ -3,7 +3,7 @@ name: design-comprobante
 description: >
   Estándar visual del tipo COMPROBANTE / FACTURACIÓN COMPLETA: cabecera del comprobante +
   secciones en pestañas (ítems, percepciones, vencimientos, pagos, vínculos) + totales. Usar
-  cuando restyle-view infiere que la vista es un comprobante/factura completa. Define estructura,
+  cuando restyle-view o redesign-view infiere que la vista es un comprobante/factura completa. Define estructura,
   componentes shadcn y qué preservar.
 ---
 

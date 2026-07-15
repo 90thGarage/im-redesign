@@ -2,7 +2,7 @@
 name: design-facturacion-rapida
 description: >
   Estándar visual del tipo FACTURACIÓN RÁPIDA (POS de mostrador): 3 columnas (favoritos,
-  carrito, acciones) + barra de total + modales de pago/balanza/cámara. Usar cuando restyle-view
+  carrito, acciones) + barra de total + modales de pago/balanza/cámara. Usar cuando restyle-view o redesign-view
   infiere que la vista es facturación rápida. Define estructura, componentes shadcn y qué preservar.
 ---
 

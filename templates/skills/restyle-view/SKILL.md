@@ -28,8 +28,8 @@ Cuando el usuario indica un archivo/vista existente y pide embellecerla/estandar
 - Markup/JSX y estilos → **shadcn/ui** + tokens del design system (`ui-design-system`).
 - Cero colores arbitrarios. Respetar el toggle claro/oscuro existente.
 
-**Única excepción de UX:** en el tipo **Menú**, persistencia de pestañas (ruta + localStorage).
-En el resto: se ve mejor, se usa igual.
+**Sin excepciones de UX:** se ve mejor, se usa igual. Mejoras de UX y layout de referencia son
+territorio de la skill `redesign-view` (`/im-redesign`), no de esta.
 
 ## Metodo (en orden)
 1. **Leer toda la vista** (componente + hooks/helpers/estilos que use). Mapear: props/export,
@@ -38,7 +38,10 @@ En el resto: se ve mejor, se usa igual.
      abrir la vista legacy equivalente en el navegador, hacer un **snapshot** (estructura,
      toolbar/acciones habilitadas, filtros, columnas, panel lateral, totales) y screenshot.
      Sirve para inventariar lo que el código no deja obvio. No ejecutar acciones destructivas.
-2. **Inferir el tipo** (ver heurística) y leer la skill `design-<tipo>` correspondiente.
+2. **Inferir el tipo** (ver heurística) y leer la skill `design-<tipo>` correspondiente **solo
+   para mapear componentes shadcn, variantes de botones e inventario mínimo** — NO para
+   reestructurar la vista al layout de referencia. La estructura, el orden de campos y el flujo
+   existentes se mantienen (excepción: Auth, ver abajo, no cambia).
 3. **Setup shadcn (bloqueante):** confirmar `components.json` + las primitivas del **inventario
    mínimo del tipo** (`ui-design-system/reference/shadcn.md`). Si faltan, instalarlas antes de tocar
    el JSX. Nunca cerrar con `<button>`/`<input>`/`<select>`/`react-select` crudos (gobernanza de

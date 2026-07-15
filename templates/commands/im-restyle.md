@@ -13,7 +13,10 @@ Proceso:
      legacy en el navegador, snapshot + screenshot para inventariar acciones/columnas/panel que el
      código no deja obvio. Nada destructivo.
 2. **Inferí el tipo** (Menú / ABM / Consultas / Facturación rápida / Comprobante) y leé la skill
-   `design-<tipo>` + `ui-design-system`. Si no estás seguro del tipo, **preguntá**.
+   `design-<tipo>` **solo para mapear componentes shadcn, variantes de botones e inventario
+   mínimo** — NO para reestructurar la vista al layout de referencia; mantené la estructura, el
+   orden de campos y el flujo existentes (excepción: Auth, spec fija). Si no estás seguro del
+   tipo, **preguntá**.
 3. **shadcn bloqueante:** confirmá que estén las primitivas del **inventario mínimo del tipo**
    (`ui-design-system/reference/shadcn.md`); instalá las que falten antes de reescribir.
 4. **Reescribí solo el JSX/estilos** a shadcn + tokens, manteniendo cada handler/binding/ref
@@ -24,7 +27,8 @@ Proceso:
    validaciones, teclado. No muevas/renombres archivos.
 6. **Verificá** typecheck/build y que la API quede idéntica (podés usar `/im-review-ui`).
 
-Única excepción de UX: si es el **Menú**, podés sumar persistencia de pestañas (ruta + localStorage).
+Sin excepciones de UX: se ve mejor, se usa igual. Mejoras de UX y layout de referencia son
+territorio de `/im-redesign`.
 
 Al terminar, reportá: tipo inferido, qué cambió (solo presentación) y confirmación de que API +
 lógica + teclado quedan intactos. Si algo era ambiguo entre lógica y presentación, lo dejaste como estaba.

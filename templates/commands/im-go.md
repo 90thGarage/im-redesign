@@ -49,6 +49,8 @@ Reportá en pocas líneas: tipo inferido, qué hizo `/im-setup` (o "ya estaba"),
 al `.md`). Confirmá que **API + lógica + teclado quedan intactos**.
 
 ## Reglas
+- `/im-go` hace **restyle (solo UI)**; los cambios de UX/estructura son de `/im-redesign` y
+  quedan fuera de este loop.
 - **Orden estricto:** `/im-setup` → `/im-restyle` → `/im-review-ui` → loop. No saltees ni resumas
   un comando; ejecutá cada uno entero.
 - **Setup primero, siempre.** Si el setup no terminó OK, no se reestiliza nada.

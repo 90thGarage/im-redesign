@@ -2,8 +2,9 @@
 name: design-menu
 description: >
   Estándar visual del tipo MENÚ (shell de la app): sidebar de navegación + barra de pestañas
-  (MDI). Usar cuando restyle-view infiere que la vista es el menú/shell. Define la estructura,
-  los componentes shadcn y qué preservar. Única mejora de UX permitida: persistencia de pestañas.
+  (MDI). Usar cuando restyle-view o redesign-view infiere que la vista es el menú/shell. Define la estructura,
+  los componentes shadcn y qué preservar. En redesign (redesign-view) se permite una mejora de
+  UX: persistencia de pestañas.
 ---
 
 # Diseño para Menú (shell + navegación)
@@ -25,9 +26,10 @@ Composición de sidebar, `Tabs`/barra custom para pestañas, `Collapsible`/`Acco
 Favoritos (estrella), switch Menú/Favoritos, cambio de empresa/base, zoom, modo oscuro, colapsar
 sidebar, y toda la gestión de pestañas (abrir, cambiar, cerrar, activa, sincronía con el menú).
 
-## Única mejora de UX permitida
-Pestañas respaldadas por **ruta/URL + persistencia (localStorage)** → sobreviven al recargar y
-quedan deep-linkables. Sin command palette por ahora.
+## Única mejora de UX permitida (solo en redesign)
+Solo si la vista se trabaja con `redesign-view` (`/im-redesign`): pestañas respaldadas por
+**ruta/URL + persistencia (localStorage)** → sobreviven al recargar y quedan deep-linkables.
+En un restyle (`/im-restyle`) NO se agrega. Sin command palette por ahora.
 
 ## Layout de referencia
 ```

@@ -2,7 +2,7 @@
 name: design-consultas
 description: >
   Estándar visual del tipo CONSULTAS (reporte solo lectura con listados guardados). Usar cuando
-  restyle-view infiere que la vista es una consulta/listado. Define estructura, componentes
+  restyle-view o redesign-view infiere que la vista es una consulta/listado. Define estructura, componentes
   shadcn y qué preservar.
 ---
 

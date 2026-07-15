@@ -35,7 +35,7 @@ npx github:90thGarage/im-redesign install --agent claude --yes
 ```
 
 > **Codex:** los slash commands quedan disponibles de forma global. Reiniciá Codex y aparecen como
-> `/im-go`, `/im-setup`, `/im-restyle`, `/im-review-ui`.
+> `/im-go`, `/im-setup`, `/im-restyle`, `/im-redesign`, `/im-review-ui`.
 
 Después de instalar, reiniciá o abrí un chat nuevo en tu agente para que tome el kit.
 
@@ -55,6 +55,7 @@ en loop. Si preferís ir paso a paso:
 | `/im-go <vista>` | **Todo en uno** (recomendado). |
 | `/im-setup` | Prepara el proyecto: shadcn + tokens + fuentes. Sin romper nada. |
 | `/im-restyle <vista>` | Reembellece una vista preservando API, lógica y comportamiento. |
+| `/im-redesign <vista>` | Rediseña una vista (layout del tipo + UX con contexto real) preservando lógica y API. |
 | `/im-review-ui <vista>` | Verifica que quedó estándar **y** que no se rompió nada. |
 
 ## Cómo funciona

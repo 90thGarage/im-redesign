@@ -33,7 +33,9 @@ existe y se mejora **cómo se usa**, guiándose por **contexto de uso real** lev
    - `ux-context/tipos/<tipo>.md` (obligatorio — uso general del tipo).
    - `ux-context/vistas/<vista>.md` (opcional — particularidades de una vista).
 3. Al mejorar una vista, **leer** el contexto del tipo (y de la vista si existe) **antes** de tocar
-   nada, para saber tareas frecuentes, atajos sagrados, dolores y qué es intocable.
+   nada, para saber tareas frecuentes, atajos sagrados, dolores y qué es intocable. El consumidor
+   de este contexto es la skill `redesign-view` (`/im-redesign`) — `/im-restyle` **no** lee este
+   contexto (es solo piel).
 
 Los archivos de `examples/` son **plantillas de arranque**: copialos a `ux-context/tipos/<tipo>.md`
 en el proyecto y ajustá con datos reales. Están marcados como no validados.
