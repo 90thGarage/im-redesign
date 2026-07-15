@@ -15,8 +15,8 @@ Proceso:
 2. **Inferí el tipo** (Menú / ABM / Consultas / Facturación rápida / Comprobante) y leé la skill
    `design-<tipo>` **solo para mapear componentes shadcn, variantes de botones e inventario
    mínimo** — NO para reestructurar la vista al layout de referencia; mantené la estructura, el
-   orden de campos y el flujo existentes (excepción: Auth, spec fija). Si no estás seguro del
-   tipo, **preguntá**.
+   orden de campos y el flujo existentes (incluso en Auth: la spec fija de `design-auth` es de
+   `/im-redesign`). Si no estás seguro del tipo, **preguntá**.
 3. **shadcn bloqueante:** confirmá que estén las primitivas del **inventario mínimo del tipo**
    (`ui-design-system/reference/shadcn.md`); instalá las que falten antes de reescribir.
 4. **Reescribí solo el JSX/estilos** a shadcn + tokens, manteniendo cada handler/binding/ref

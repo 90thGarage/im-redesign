@@ -41,7 +41,7 @@ territorio de la skill `redesign-view` (`/im-redesign`), no de esta.
 2. **Inferir el tipo** (ver heurística) y leer la skill `design-<tipo>` correspondiente **solo
    para mapear componentes shadcn, variantes de botones e inventario mínimo** — NO para
    reestructurar la vista al layout de referencia. La estructura, el orden de campos y el flujo
-   existentes se mantienen (excepción: Auth, ver abajo, no cambia).
+   existentes se mantienen.
 3. **Setup shadcn (bloqueante):** confirmar `components.json` + las primitivas del **inventario
    mínimo del tipo** (`ui-design-system/reference/shadcn.md`). Si faltan, instalarlas antes de tocar
    el JSX. Nunca cerrar con `<button>`/`<input>`/`<select>`/`react-select` crudos (gobernanza de
@@ -58,8 +58,9 @@ territorio de la skill `redesign-view` (`/im-redesign`), no de esta.
 - **Facturación rápida:** buscador de productos + carrito + total + cobro. → `design-facturacion-rapida`
 - **Comprobante / Facturación completa:** cabecera + ítems + totales + CAE/fiscal. → `design-comprobante`
 - **Auth:** pantalla de login/registro (usuario/clave, Google, "mantener sesión"). → `design-auth`
-  ⚠️ Auth NO es un restyle 1:1: es **spec fija** (bloque `login-02` + paneles). Seguí `design-auth`
-  tal cual en vez de preservar el markup viejo. La lógica de auth (endpoints, Google, biometría) sí se preserva.
+  En restyle, Auth también es **solo piel**: se mantiene el markup existente y `design-auth` se usa
+  solo para mapear componentes/tokens. La **spec fija** (bloque `login-02` + paneles) se aplica
+  únicamente en `redesign-view` (`/im-redesign`).
 - Si no estás seguro del tipo, **preguntá** antes de reescribir.
 
 ## Reglas duras

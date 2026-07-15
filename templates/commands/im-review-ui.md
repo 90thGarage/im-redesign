@@ -33,7 +33,8 @@ crítico**; la preservación de API/lógica/endpoints aplica igual en ambos modo
       la base oscura; `#0057FF` en `.light`) — NO un indigo/morado del default de shadcn
       (`#2563eb`/oklch). Ningún botón hardcodea color (`bg-blue-600`, `bg-[#...]`); usan `bg-primary`.
       `--ring`/`--accent` tampoco quedaron en el indigo default.
-      **Excepción documentada — Auth (`design-auth`):** los dos paneles de login son **spec fija
+      **Excepción documentada — Auth con spec fija (`design-auth`, solo vía `/im-redesign`):**
+      los dos paneles de login son **spec fija
       theme-independiente**: deben computar azul `rgb(0, 87, 255)` (`#0057FF`) y superficie oscura
       fija en **AMBOS** temas (no `#4f86ff` en oscuro). Ahí el color literal está permitido y NO es
       un hallazgo; sí es hallazgo si el panel cambia de color al togglear el tema.

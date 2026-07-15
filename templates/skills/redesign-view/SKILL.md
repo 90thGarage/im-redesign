@@ -36,7 +36,9 @@ Cuando el usuario pide rediseñar o mejorar la UX de una vista existente, no sol
      abrir la vista legacy equivalente en el navegador, hacer un **snapshot** (estructura,
      toolbar/acciones habilitadas, filtros, columnas, panel lateral, totales) y screenshot.
 2. **Inferir el tipo** — misma heurística que `restyle-view` (ver esa skill, sección
-   "Heurística de tipo"; incluye la entrada de **Auth**) — y leer `design-<tipo>`.
+   "Heurística de tipo") — y leer `design-<tipo>`. Si es **Auth**, aplicar la **spec fija** de
+   `design-auth` tal cual (bloque `login-02` + paneles, reemplaza el markup viejo); la lógica de
+   auth (endpoints, Google, biometría) se preserva.
 3. **Leer contexto UX (obligatorio):** `ux-context/tipos/<tipo>.md` del proyecto y
    `ux-context/vistas/<vista>.md` si existe (formato en la skill `ux-context`). Si no existe
    contexto del tipo: **avisar** y rediseñar solo con el layout de referencia de `design-<tipo>`,

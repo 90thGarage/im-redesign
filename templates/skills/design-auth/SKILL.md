@@ -1,18 +1,21 @@
 ---
 name: design-auth
 description: >
-  Estándar visual del tipo AUTH (login / register) de InfoManager. Usar cuando la vista es la
-  pantalla de login/registro. A diferencia de los otros tipos, NO se restylea preservando 1:1:
-  se implementa desde el bloque shadcn login-02 con layout fijo (panel azul de marca con textura
-  de líneas + panel oscuro con el formulario). Spec fija, no requiere contexto de entrevista.
+  Estándar visual del tipo AUTH (login / register) de InfoManager. La spec fija se aplica solo
+  en redesign (redesign-view / im-redesign): se implementa desde el bloque shadcn login-02 con
+  layout fijo (panel azul de marca con textura de líneas + panel oscuro con el formulario). No
+  requiere contexto de entrevista. En restyle (im-restyle) auth es solo piel: esta skill se usa
+  únicamente para mapear componentes/tokens.
 ---
 
 # Diseño para Auth (login / register)
 
-**Auth es distinto a los otros tipos:** no es un restyle que preserva todo, es una **spec fija** que
-se implementa igual siempre. Objetivo: la pantalla de login de InfoManager (panel azul con textura +
-panel oscuro con el formulario). **Preservar el flujo de autenticación** (Google, usuario/clave,
-mantener sesión, olvidé contraseña, biometría, multi-empresa) — la lógica y los endpoints no se tocan.
+**Auth es distinto a los otros tipos:** es una **spec fija** que se implementa igual siempre —
+pero **solo en redesign** (`redesign-view` / `/im-redesign`); en un restyle, auth se trata como
+cualquier vista (solo piel, markup existente). Objetivo: la pantalla de login de InfoManager
+(panel azul con textura + panel oscuro con el formulario). **Preservar el flujo de autenticación**
+(Google, usuario/clave, mantener sesión, olvidé contraseña, biometría, multi-empresa) — la lógica
+y los endpoints no se tocan.
 
 ## Base: shadcn `login-02`
 
